@@ -12,8 +12,6 @@ public class R {
 			150, 150, 150, 100, 350
 	};
 
-	//TODO lösche mich
-	
 	/**
 	 * Strings
 	 */
