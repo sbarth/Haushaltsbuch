@@ -45,13 +45,13 @@
                id="de.sb.plugin.finance.toolbar.finance">
             <command
                   commandId="de.sb.plugin.finance.command.newaccount"
-                  icon="icons/alt_window_32.gif"
+                  icon="icons/alt_window_16.gif"
                   mnemonic="K"
                   style="push">
             </command>
             <command
                   commandId="de.sb.plugin.finance.command.newtransaction"
-                  icon="icons/alt_window_32.gif"
+                  icon="icons/alt_window_16.gif"
                   style="push">
             </command>
          </toolbar>

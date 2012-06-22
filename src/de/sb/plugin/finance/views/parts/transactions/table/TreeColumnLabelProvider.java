@@ -1,7 +1,5 @@
 package de.sb.plugin.finance.views.parts.transactions.table;
 
-import java.text.SimpleDateFormat;
-
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TreeNode;
 
@@ -31,8 +29,7 @@ public class TreeColumnLabelProvider extends ColumnLabelProvider {
 				result = transaction.getCategory().toString();
 			}
 			if (R.COLUMN_NAME_DATE.equals(columnName)) {
-				SimpleDateFormat format = new SimpleDateFormat(R.TABLE_TRANSACTION_DATE_FORMAT);
-				result = format.format(transaction.getDate().getTime());
+				result = R.DATE_FORMAT.format(transaction.getDate().getTime());
 			}
 			if (R.COLUMN_NAME_DESCRIPTION.equals(columnName)) {
 				result = transaction.getDescription();

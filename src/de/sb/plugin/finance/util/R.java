@@ -13,7 +13,7 @@ public class R {
 	};
 
 	/**
-	 * Strings
+	 * Labels
 	 */
 	public static final String COLUMN_NAME_AMOUNT = "Betrag";
 	public static final String COLUMN_NAME_CATEGORY = "Kategorie";
@@ -25,7 +25,6 @@ public class R {
 	public static final String COMBO_TRANSACTION_ACCOUNT_COMMON = "Gemeinsam";
 	public static final String COMBO_TRANSACTION_ACCOUNT_GIRO = "Girokonto";
 	public static final String COMBO_TRANSACTION_ACCOUNT_INSTANT = "Tagesgeldkonto";
-
 	public static final String COMBO_TRANSACTION_GROUPBY_ACCOUNT = "Konto";
 	public static final String COMBO_TRANSACTION_GROUPBY_BRANCH = "Sparte";
 	public static final String COMBO_TRANSACTION_GROUPBY_CATEGORY = "Kategorie";
@@ -34,7 +33,6 @@ public class R {
 	public static final String COMBO_TRANSACTION_GROUPBY_NOTHING = "Keine Gruppierung";
 	public static final String COMBO_TRANSACTION_GROUPBY_TRANSACTION_TYPE = "Buchungsart";
 	public static final String COMBO_TRANSACTION_GROUPBY_WEEK = "Woche";
-
 	public static final String COMBO_TRANSACTION_TIMESPAN_CURRENTDAY = "Heute";
 	public static final String COMBO_TRANSACTION_TIMESPAN_CURRENTMONTH = "Aktueller Monat";
 	public static final String COMBO_TRANSACTION_TIMESPAN_CURRENTQUARTER = "Aktuelles Quartal";
@@ -43,18 +41,20 @@ public class R {
 	public static final String COMBO_TRANSACTION_TIMESPAN_PREVIOUSQUARTER = "Letztes Quartal";
 	public static final String COMBO_TRANSACTION_TIMESPAN_PREVIOUSYEAR = "Letztes Jahr";
 	public static final String COMBO_TRANSACTION_TIMESPAN_SELECT = "Freier Zeitraum";
-
 	public static final String COMBO_TRANSACTION_TYPE_ALL = "Alle Buchungen";
 	public static final String COMBO_TRANSACTION_TYPE_INCOME = "Einnahme";
 	public static final String COMBO_TRANSACTION_TYPE_OUTCOME = "Ausgabe";
 	public static final String COMBO_TRANSACTION_TYPE_TRANSFER = "Umbuchung";
 
-	public static final String LABEL_PERSPECTIVE_FINANCE_TITLE = "Buchhaltung";
+	public static final String LABEL_DIALOG_NEW_ACCOUNT_DESCRIPTION = "Beschreibung: ";
+	public static final String LABEL_DIALOG_NEW_ACCOUNT_LOGO = "Logo: ";
+	public static final String LABEL_DIALOG_NEW_ACCOUNT_NAME = "Name: ";
 	public static final String LABEL_FILTER_COMPOSITE_ACCOUNT = "Konto:";
 	public static final String LABEL_FILTER_COMPOSITE_GROUPBY = "Gruppierung:";
 	public static final String LABEL_FILTER_COMPOSITE_SEARCH = "Suche:";
 	public static final String LABEL_FILTER_COMPOSITE_TIMESPAN = "Zeitraum:";
 	public static final String LABEL_FILTER_COMPOSITE_TRANSACTIONTYPE = "Buchungsart:";
+	public static final String LABEL_PERSPECTIVE_FINANCE_TITLE = "Buchhaltung";
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_CURRENTMONTH = "Aktueller Monat (Summe)";
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_DIFFERENCE = "Differenz: ";
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_FIXINCOME = "Fixe Einnahmen:";
@@ -62,7 +62,7 @@ public class R {
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_VARINCOME = "Einmailige Einnahmen:";
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_VAROUTCOME = "Einmailige Ausgaben:";
 
-	public static final String TABLE_TRANSACTION_DATE_FORMAT = "dd.MM.yyyy";
+	public static final String TITLE_DIALOG_NEW_ACCOUNT = "Erstelle neues Konto";
 
 	/**
 	 * String-Arrays
@@ -87,13 +87,14 @@ public class R {
 			COMBO_TRANSACTION_TIMESPAN_CURRENTYEAR, COMBO_TRANSACTION_TIMESPAN_PREVIOUSMONTH, COMBO_TRANSACTION_TIMESPAN_PREVIOUSQUARTER,
 			COMBO_TRANSACTION_TIMESPAN_PREVIOUSYEAR, COMBO_TRANSACTION_TIMESPAN_SELECT
 	};
+
 	/**
-	 * Perspectives
+	 * Perspective IDs
 	 */
 	public static final String PERSPECTIVE_ID_FINANCE = "de.sb.plugin.finance.perspective";
 
 	/**
-	 * Views
+	 * View IDs
 	 */
 	public static final String VIEW_ID_STATISTICS = "de.sb.plugin.finance.views.Statistics";
 	public static final String VIEW_ID_TRANSACTIONLIST = "de.sb.plugin.finance.views.TransactionList";
@@ -102,6 +103,6 @@ public class R {
 	 * Formate
 	 */
 	public static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(Locale.GERMANY);
-	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(TABLE_TRANSACTION_DATE_FORMAT);
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 }

@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.sb.plugin.finance.util.LayoutFactory;
+import de.sb.plugin.finance.util.R;
 
 public class NewAccountDialog extends TitleAreaDialog {
 	public NewAccountDialog(final Shell parentShell) {
@@ -24,7 +25,7 @@ public class NewAccountDialog extends TitleAreaDialog {
 	protected Control createContents(final Composite parent) {
 		Control contents = super.createContents(parent);
 
-		setTitle("Erstelle neues Konto");
+		setTitle(R.TITLE_DIALOG_NEW_ACCOUNT);
 
 		return contents;
 	}
@@ -40,7 +41,7 @@ public class NewAccountDialog extends TitleAreaDialog {
 
 		Label lblLogo = new Label(comp, SWT.NONE);
 		lblLogo.setLayoutData(gdLabels);
-		lblLogo.setText("Logo:");
+		lblLogo.setText(R.LABEL_DIALOG_NEW_ACCOUNT_LOGO);
 
 		ComboViewer cvLogo = new ComboViewer(comp, SWT.READ_ONLY);
 		cvLogo.getCombo().setLayoutData(gdRightSide);
@@ -48,14 +49,14 @@ public class NewAccountDialog extends TitleAreaDialog {
 
 		Label lblName = new Label(comp, SWT.NONE);
 		lblName.setLayoutData(gdLabels);
-		lblName.setText("Name:");
+		lblName.setText(R.LABEL_DIALOG_NEW_ACCOUNT_NAME);
 
 		Text txtName = new Text(comp, SWT.BORDER);
 		txtName.setLayoutData(gdRightSide);
 
 		Label lblDescription = new Label(comp, SWT.NONE);
 		lblDescription.setLayoutData(gdLabels);
-		lblDescription.setText("Beschreibung:");
+		lblDescription.setText(R.LABEL_DIALOG_NEW_ACCOUNT_DESCRIPTION);
 
 		Text txtDescription = new Text(comp, SWT.BORDER);
 		txtDescription.setLayoutData(gdRightSide);
