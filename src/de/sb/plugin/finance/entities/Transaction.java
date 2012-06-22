@@ -1,8 +1,9 @@
 package de.sb.plugin.finance.entities;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import de.sb.plugin.finance.util.R;
 
 public class Transaction {
 	private Account account;
@@ -62,8 +63,6 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-
-		return format.format(date.getTime()) + ": " + category + " = " + amount;
+		return R.DATE_FORMAT.format(date.getTime()) + ": " + category + " = " + amount;
 	}
 }

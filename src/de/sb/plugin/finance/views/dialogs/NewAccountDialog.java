@@ -13,10 +13,15 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.util.LayoutFactory;
 import de.sb.plugin.finance.util.R;
 
 public class NewAccountDialog extends TitleAreaDialog {
+	private ComboViewer cvLogo;
+	private Text txtDescription;
+	private Text txtName;
+
 	public NewAccountDialog(final Shell parentShell) {
 		super(parentShell);
 	}
@@ -43,25 +48,34 @@ public class NewAccountDialog extends TitleAreaDialog {
 		lblLogo.setLayoutData(gdLabels);
 		lblLogo.setText(R.LABEL_DIALOG_NEW_ACCOUNT_LOGO);
 
-		ComboViewer cvLogo = new ComboViewer(comp, SWT.READ_ONLY);
+		cvLogo = new ComboViewer(comp, SWT.READ_ONLY);
 		cvLogo.getCombo().setLayoutData(gdRightSide);
-		cvLogo.setContentProvider(ArrayContentProvider.getInstance());
+		cvLogo.setContentProvider(ArrayContentProvider.getInstance()); // TODO Liste befüllen
 
 		Label lblName = new Label(comp, SWT.NONE);
 		lblName.setLayoutData(gdLabels);
 		lblName.setText(R.LABEL_DIALOG_NEW_ACCOUNT_NAME);
 
-		Text txtName = new Text(comp, SWT.BORDER);
+		txtName = new Text(comp, SWT.BORDER);
 		txtName.setLayoutData(gdRightSide);
 
 		Label lblDescription = new Label(comp, SWT.NONE);
 		lblDescription.setLayoutData(gdLabels);
 		lblDescription.setText(R.LABEL_DIALOG_NEW_ACCOUNT_DESCRIPTION);
 
-		Text txtDescription = new Text(comp, SWT.BORDER);
+		txtDescription = new Text(comp, SWT.BORDER);
 		txtDescription.setLayoutData(gdRightSide);
 
 		return parent;
+	}
+
+	public Account getAccount() {
+		Account acc = new Account();
+		acc.setDescription(txtDescription.getText());
+		acc.setLogo(null); // TODO Bild aus Combo herausziehen
+		acc.setName(txtName.getText());
+
+		return acc;
 	}
 
 	@Override
