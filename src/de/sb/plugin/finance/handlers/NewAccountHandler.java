@@ -1,5 +1,9 @@
 package de.sb.plugin.finance.handlers;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -17,6 +21,17 @@ public class NewAccountHandler extends AbstractHandler {
 
 		if (result == Window.OK) {
 			Account account = dialog.getAccount();
+			// DatabaseOperations.insertAccount(account);
+
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("db");
+			EntityManager em = factory.createEntityManager();
+
+			em.getTransaction().begin();
+
+			em.persist(account);
+			em.getTransaction().commit();
+
+			em.close();
 
 		}
 

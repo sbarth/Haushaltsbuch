@@ -46,9 +46,10 @@ public class R {
 	public static final String COMBO_TRANSACTION_TYPE_OUTCOME = "Ausgabe";
 	public static final String COMBO_TRANSACTION_TYPE_TRANSFER = "Umbuchung";
 
-	public static final String LABEL_DIALOG_NEW_ACCOUNT_DESCRIPTION = "Beschreibung: ";
-	public static final String LABEL_DIALOG_NEW_ACCOUNT_LOGO = "Logo: ";
-	public static final String LABEL_DIALOG_NEW_ACCOUNT_NAME = "Name: ";
+	public static final String LABEL_DIALOG_NEW_ACCOUNT_DESCRIPTION = "Beschreibung:";
+	public static final String LABEL_DIALOG_NEW_ACCOUNT_LOGO = "Logo:";
+	public static final String LABEL_DIALOG_NEW_ACCOUNT_NAME = "Name:";
+	public static final String LABEL_DIALOG_NEW_ACCOUNT_STARTAMOUNT = "Startbetrag:";
 	public static final String LABEL_FILTER_COMPOSITE_ACCOUNT = "Konto:";
 	public static final String LABEL_FILTER_COMPOSITE_GROUPBY = "Gruppierung:";
 	public static final String LABEL_FILTER_COMPOSITE_SEARCH = "Suche:";

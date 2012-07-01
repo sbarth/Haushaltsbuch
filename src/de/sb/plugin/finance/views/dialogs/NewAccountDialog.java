@@ -1,5 +1,7 @@
 package de.sb.plugin.finance.views.dialogs;
 
+import java.math.BigDecimal;
+
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -21,6 +23,7 @@ public class NewAccountDialog extends TitleAreaDialog {
 	private ComboViewer cvLogo;
 	private Text txtDescription;
 	private Text txtName;
+	private Text txtStartAmount;
 
 	public NewAccountDialog(final Shell parentShell) {
 		super(parentShell);
@@ -66,14 +69,22 @@ public class NewAccountDialog extends TitleAreaDialog {
 		txtDescription = new Text(comp, SWT.BORDER);
 		txtDescription.setLayoutData(gdRightSide);
 
+		Label lblStartAmount = new Label(comp, SWT.NONE);
+		lblStartAmount.setLayoutData(gdLabels);
+		lblStartAmount.setText(R.LABEL_DIALOG_NEW_ACCOUNT_STARTAMOUNT);
+
+		txtStartAmount = new Text(comp, SWT.BORDER);
+		txtStartAmount.setLayoutData(gdRightSide);
+
 		return parent;
 	}
 
 	public Account getAccount() {
 		Account acc = new Account();
-		acc.setDescription(txtDescription.getText());
+		acc.setDescription("Test");
 		acc.setLogo(null); // TODO Bild aus Combo herausziehen
-		acc.setName(txtName.getText());
+		acc.setName("Test");
+		acc.setStartAmount(new BigDecimal("0"));
 
 		return acc;
 	}

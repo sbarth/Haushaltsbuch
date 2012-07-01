@@ -7,6 +7,7 @@ create table ACCOUNT (
     name VARCHAR(100),
     description VARCHAR(1000),
     logo VARCHAR(1000),
+    startamount DECIMAL NOT NULL,
     PRIMARY KEY (account_id)
 );
 
