@@ -37,6 +37,6 @@ create table TRANSACTION(
 	PRIMARY KEY (transaction_id),
     FOREIGN KEY (account_id) REFERENCES ACCOUNT(account_id),
     FOREIGN KEY (category_id) REFERENCES CATEGORY(category_id),
-    FOREIGN KEY (transaction_id) REFERENCES TRANSACTION(transaction_id),
+    FOREIGN KEY (parent_id) REFERENCES TRANSACTION(transaction_id),
     FOREIGN KEY (type_id) REFERENCES TRANSACTION_TYPE(type_id)
 );

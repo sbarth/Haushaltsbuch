@@ -9,13 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.eclipse.swt.graphics.Image;
 
 @Entity
-@SequenceGenerator(name = "account_sequence", sequenceName = "account_id_seq")
 @Table(name = "account")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 2353704457224727666L;
