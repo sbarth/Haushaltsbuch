@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import de.sb.plugin.finance.util.R;
-
 @Entity
 @Table(name = "transaction")
 public class Transaction implements Serializable {
@@ -106,6 +104,6 @@ public class Transaction implements Serializable {
 
 	@Override
 	public String toString() {
-		return R.DATE_FORMAT.format(date.getTime()) + ": " + category + " = " + amount;
+		return "Transaction: ID=" + id + ", " + category.getName() + ", " + amount;
 	}
 }

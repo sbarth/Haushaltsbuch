@@ -82,7 +82,7 @@ public class NewAccountDialog extends TitleAreaDialog {
 	public Account getAccount() {
 		Account acc = new Account();
 		acc.setDescription("Test");
-		acc.setLogo(null); // TODO Bild aus Combo herausziehen
+		acc.setLogo("keins"); // TODO Bild aus Combo herausziehen
 		acc.setName("Test");
 		acc.setStartAmount(new BigDecimal("0"));
 
