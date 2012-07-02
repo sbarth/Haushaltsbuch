@@ -1,8 +1,8 @@
 package de.sb.plugin.finance.handlers;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.math.BigDecimal;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -10,7 +10,11 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
+import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Account;
+import de.sb.plugin.finance.entities.Category;
+import de.sb.plugin.finance.entities.Transaction;
+import de.sb.plugin.finance.entities.TransactionType;
 import de.sb.plugin.finance.views.dialogs.NewAccountDialog;
 
 public class NewAccountHandler extends AbstractHandler {
@@ -20,19 +24,20 @@ public class NewAccountHandler extends AbstractHandler {
 		int result = dialog.open();
 
 		if (result == Window.OK) {
-			Account account = dialog.getAccount();
-			// DatabaseOperations.insertAccount(account);
+			DatabaseOperations ops = DatabaseOperations.getInstance();
 
-			EntityManagerFactory factory = Persistence.createEntityManagerFactory("db");
-			EntityManager em = factory.createEntityManager();
+			List<Account> allAccounts = ops.getAllAccounts();
+			List<Category> allCategories = ops.getAllCategories();
 
-			em.getTransaction().begin();
+			Transaction t = new Transaction();
+			t.setAccount(allAccounts.get(0));
+			t.setAmount(new BigDecimal("500.00"));
+			t.setCategory(allCategories.get(0));
+			t.setDate(new GregorianCalendar());
+			t.setDescription("Taschengeld");
+			t.setType(TransactionType.INCOME.getName());
 
-			em.persist(account);
-			em.getTransaction().commit();
-
-			em.close();
-
+			ops.insert(t);
 		}
 
 		return null;

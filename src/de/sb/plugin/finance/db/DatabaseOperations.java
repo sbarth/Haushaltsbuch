@@ -1,43 +1,59 @@
 package de.sb.plugin.finance.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import de.sb.plugin.finance.entities.Account;
+import de.sb.plugin.finance.entities.Category;
 
 public class DatabaseOperations {
-	private static Connection connect = null;
-	private static PreparedStatement preparedStatement = null;
+	private volatile static DatabaseOperations dbOps;
 
-	private static void close() {
-		try {
-			if (connect != null) {
-				connect.close();
+	public static DatabaseOperations getInstance() {
+		if (dbOps == null) {
+			synchronized (DatabaseOperations.class) {
+				if (dbOps == null) {
+					dbOps = new DatabaseOperations();
+				}
 			}
-		} catch (Exception e) {
-
-		}
-	}
-
-	public static void insertAccount(final Account account) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connect = DriverManager.getConnection("jdbc:mysql://localhost/finance_db?" + "user=root&password=admin");
-
-			preparedStatement = connect.prepareStatement("insert into  finance_db.account values (default,?, ?, ?)");
-			preparedStatement.setString(1, account.getName());
-			preparedStatement.setString(2, account.getDescription());
-			preparedStatement.setString(3, "todo");
-			preparedStatement.executeUpdate();
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			// TODO Logger einfügen
-		} finally {
-			close();
 		}
 
+		return dbOps;
 	}
 
+	private final ConnectionHandler handler;
+
+	private DatabaseOperations() {
+		handler = new ConnectionHandler();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Account> getAllAccounts() {
+		EntityManager manager = handler.openEntityManager();
+		Query query = manager.createNamedQuery("findAllAccounts");
+
+		List<Account> accounts = query.getResultList();
+		handler.closeEntityManager();
+
+		return accounts;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Category> getAllCategories() {
+		EntityManager manager = handler.openEntityManager();
+		Query query = manager.createNamedQuery("findAllCategories");
+
+		List<Category> categories = query.getResultList();
+		handler.closeEntityManager();
+
+		return categories;
+	}
+
+	public void insert(final Object o) {
+		EntityManager manager = handler.openEntityTransaction();
+		manager.merge(o);
+		handler.closeEntityTransaction();
+	}
 }

@@ -46,9 +46,11 @@ public class TableTransactionFilter extends ViewerFilter {
 		}
 		if (filterByTransactionType != null && !filterByTransactionType.equals("")) {
 			if (filterByTransactionType.equals(R.COMBO_TRANSACTION_TYPE_INCOME)) {
-				matches = matches && (transaction.getType() == TransactionType.FIX_INCOME || transaction.getType() == TransactionType.INCOME);
+				matches = matches && (TransactionType.FIX_INCOME.getName().equals(transaction.getType()) || //
+						TransactionType.INCOME.getName().equals(transaction.getType()));
 			} else if (filterByTransactionType.equals(R.COMBO_TRANSACTION_TYPE_OUTCOME)) {
-				matches = matches && (transaction.getType() == TransactionType.FIX_OUTCOME || transaction.getType() == TransactionType.OUTCOME);
+				matches = matches && (TransactionType.FIX_OUTCOME.getName().equals(transaction.getType()) //
+						|| TransactionType.OUTCOME.getName().equals(transaction.getType()));
 			}
 		}
 

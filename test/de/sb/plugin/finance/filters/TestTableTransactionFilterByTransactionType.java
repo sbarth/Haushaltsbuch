@@ -14,7 +14,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_ALL);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.INCOME);
+		t.setType(TransactionType.INCOME.getName());
 
 		Assert.assertTrue(filter.matches(t));
 	}
@@ -24,7 +24,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_INCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.FIX_INCOME);
+		t.setType(TransactionType.FIX_INCOME.getName());
 
 		Assert.assertTrue(filter.matches(t));
 	}
@@ -34,7 +34,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_INCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.FIX_OUTCOME);
+		t.setType(TransactionType.FIX_OUTCOME.getName());
 
 		Assert.assertFalse(filter.matches(t));
 	}
@@ -44,7 +44,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_OUTCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.FIX_OUTCOME);
+		t.setType(TransactionType.FIX_OUTCOME.getName());
 
 		Assert.assertTrue(filter.matches(t));
 	}
@@ -54,7 +54,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_OUTCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.FIX_INCOME);
+		t.setType(TransactionType.FIX_INCOME.getName());
 
 		Assert.assertFalse(filter.matches(t));
 	}
@@ -64,7 +64,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_INCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.INCOME);
+		t.setType(TransactionType.INCOME.getName());
 
 		Assert.assertTrue(filter.matches(t));
 	}
@@ -74,7 +74,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_INCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.OUTCOME);
+		t.setType(TransactionType.OUTCOME.getName());
 
 		Assert.assertFalse(filter.matches(t));
 	}
@@ -84,7 +84,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_OUTCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.OUTCOME);
+		t.setType(TransactionType.OUTCOME.getName());
 
 		Assert.assertTrue(filter.matches(t));
 	}
@@ -94,7 +94,7 @@ public class TestTableTransactionFilterByTransactionType {
 		TableTransactionFilter filter = new TableTransactionFilter();
 		filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_OUTCOME);
 		Transaction t = new Transaction();
-		t.setType(TransactionType.INCOME);
+		t.setType(TransactionType.INCOME.getName());
 
 		Assert.assertFalse(filter.matches(t));
 	}

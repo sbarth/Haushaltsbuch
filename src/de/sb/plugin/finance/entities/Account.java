@@ -5,24 +5,40 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.eclipse.swt.graphics.Image;
 
 @Entity
 @Table(name = "account")
+@NamedQuery(name = "findAllAccounts", query = "select acc from Account acc")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 2353704457224727666L;
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private Image logo;
+
+	@Column(name = "start_amount")
 	private BigDecimal startAmount;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
 	private List<Transaction> transactions;
+
+	@Column(name = "description")
 	private String description;
+
+	@Column(name = "logo")
+	private String logo;
+
+	@Column(name = "name")
 	private String name;
 
 	public Account() {
@@ -37,13 +53,11 @@ public class Account implements Serializable {
 		return description;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_sequence")
 	public long getId() {
 		return id;
 	}
 
-	public Image getLogo() {
+	public String getLogo() {
 		return logo;
 	}
 
@@ -71,7 +85,7 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-	public void setLogo(final Image logo) {
+	public void setLogo(final String logo) {
 		this.logo = logo;
 	}
 

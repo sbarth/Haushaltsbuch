@@ -9,7 +9,6 @@ import java.util.List;
 import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.entities.Category;
 import de.sb.plugin.finance.entities.Transaction;
-import de.sb.plugin.finance.entities.TransactionType;
 
 public class DummyData {
 	private static List<Category> categories;
@@ -88,10 +87,10 @@ public class DummyData {
 		Calendar cal = createDate();
 		transaction.setDate(cal);
 
-		int index = Double.valueOf(Math.random() * TransactionType.values().length).intValue();
+		// int index = Double.valueOf(Math.random() * TransactionType.values().length).intValue();
 
 		transaction.setDescription("keine");
-		transaction.setType(TransactionType.values()[index]);
+		// transaction.setType(TransactionType.values()[index]);
 
 		return transaction;
 	}

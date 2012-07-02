@@ -7,7 +7,7 @@ import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.util.R;
 
 public class TreeColumnLabelProvider extends ColumnLabelProvider {
-	private String columnName;
+	private final String columnName;
 
 	public TreeColumnLabelProvider(final String columnName) {
 		this.columnName = columnName;
@@ -35,7 +35,7 @@ public class TreeColumnLabelProvider extends ColumnLabelProvider {
 				result = transaction.getDescription();
 			}
 			if (R.COLUMN_NAME_TRANSACTIONTYPE.equals(columnName)) {
-				result = transaction.getType().getName();
+				result = transaction.getType();
 			}
 		} else if (value.getClass() == String.class) {
 			if (R.COLUMN_NAME_DATE.equals(columnName)) {
