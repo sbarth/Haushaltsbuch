@@ -44,6 +44,10 @@ public class TableTransactionFilter extends ViewerFilter {
 		return calTo;
 	}
 
+	public String getFilterBySearch() {
+		return filterBySearch;
+	}
+
 	public boolean matches(final Transaction transaction) {
 		boolean matches = true;
 

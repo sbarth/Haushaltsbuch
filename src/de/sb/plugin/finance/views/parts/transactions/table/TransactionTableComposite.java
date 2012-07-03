@@ -152,7 +152,14 @@ public class TransactionTableComposite implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName().equals("filterChanged") && event.getNewValue().toString().equals("true")) {
 			filter.setFilterChanged(false);
+
 			treeViewer.refresh();
+
+			if (filter.getFilterBySearch() != null && !filter.getFilterBySearch().isEmpty()) {
+				treeViewer.expandAll();
+			} else {
+				treeViewer.collapseAll();
+			}
 		}
 	}
 }
