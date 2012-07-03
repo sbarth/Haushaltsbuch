@@ -4,6 +4,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
+import de.sb.plugin.finance.filters.TableTransactionFilter;
 import de.sb.plugin.finance.views.parts.transactions.filter.FilterComposite;
 import de.sb.plugin.finance.views.parts.transactions.sum.SummarizationComposite;
 import de.sb.plugin.finance.views.parts.transactions.table.TransactionTableComposite;
@@ -18,9 +19,11 @@ public class TransactionList extends ViewPart {
 		GridLayout layout = new GridLayout(1, false);
 		parent.setLayout(layout);
 
-		FilterComposite filter = new FilterComposite(parent, getSite());
-		TransactionTableComposite table = new TransactionTableComposite(parent, getSite());
-		SummarizationComposite summarization = new SummarizationComposite(parent);
+		TableTransactionFilter filter = new TableTransactionFilter();
+
+		FilterComposite filterComp = new FilterComposite(parent, getSite(), filter);
+		TransactionTableComposite tableComp = new TransactionTableComposite(parent, getSite(), filter);
+		SummarizationComposite summarizationComp = new SummarizationComposite(parent);
 	}
 
 	@Override

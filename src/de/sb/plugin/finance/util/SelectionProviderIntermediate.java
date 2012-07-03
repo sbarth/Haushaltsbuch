@@ -13,6 +13,8 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
  * This utility class may be used in workbench parts with multiple viewers.
  * 
  * @author Marc R. Hoffmann
+ * 
+ *         Wird nicht mehr gebraucht, allerdings gutes Feature was man vielleicht mal wieder braucht
  */
 public class SelectionProviderIntermediate implements IPostSelectionProvider {
 
@@ -22,7 +24,7 @@ public class SelectionProviderIntermediate implements IPostSelectionProvider {
 
 	private ISelectionProvider delegate;
 
-	private ISelectionChangedListener selectionListener = new ISelectionChangedListener() {
+	private final ISelectionChangedListener selectionListener = new ISelectionChangedListener() {
 		@Override
 		public void selectionChanged(final SelectionChangedEvent event) {
 			if (event.getSelectionProvider() == delegate) {
@@ -31,7 +33,7 @@ public class SelectionProviderIntermediate implements IPostSelectionProvider {
 		}
 	};
 
-	private ISelectionChangedListener postSelectionListener = new ISelectionChangedListener() {
+	private final ISelectionChangedListener postSelectionListener = new ISelectionChangedListener() {
 		@Override
 		public void selectionChanged(final SelectionChangedEvent event) {
 			if (event.getSelectionProvider() == delegate) {
@@ -41,8 +43,7 @@ public class SelectionProviderIntermediate implements IPostSelectionProvider {
 	};
 
 	@Override
-	public void addPostSelectionChangedListener(
-			final ISelectionChangedListener listener) {
+	public void addPostSelectionChangedListener(final ISelectionChangedListener listener) {
 		postSelectionListeners.add(listener);
 	}
 

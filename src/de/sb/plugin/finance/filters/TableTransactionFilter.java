@@ -1,5 +1,7 @@
 package de.sb.plugin.finance.filters;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -13,10 +15,13 @@ import de.sb.plugin.finance.entities.TransactionType;
 import de.sb.plugin.finance.util.Compare;
 import de.sb.plugin.finance.util.R;
 
+//TODO Interface für die SetterMethoden und dann nur noch diese an Views übergeben
 public class TableTransactionFilter extends ViewerFilter {
+	private Account filterByAccount;
+	private boolean filterChanged;
 	private Calendar calFrom;
 	private Calendar calTo;
-	private Account filterByAccount;
+	private final PropertyChangeSupport changes;
 	private String filterByDate;
 	private String filterBySearch;
 	private String filterByTransactionType;
@@ -24,6 +29,11 @@ public class TableTransactionFilter extends ViewerFilter {
 	public TableTransactionFilter() {
 		calFrom = new GregorianCalendar();
 		calTo = new GregorianCalendar();
+		changes = new PropertyChangeSupport(this);
+	}
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener(listener);
 	}
 
 	public Calendar getCalFrom() {
@@ -48,6 +58,9 @@ public class TableTransactionFilter extends ViewerFilter {
 				matches = matches && (calFrom.before(transaction.getDate()) && calTo.after(transaction.getDate()) || from || to);
 			}
 		}
+		if (filterBySearch != null && !filterBySearch.isEmpty()) {
+			matches = matches && transaction.getCategory().toString().toLowerCase().contains(filterBySearch.toLowerCase());
+		}
 		if (filterByTransactionType != null && !filterByTransactionType.equals("")) {
 			if (filterByTransactionType.equals(R.COMBO_TRANSACTION_TYPE_INCOME)) {
 				matches = matches && (TransactionType.FIX_INCOME.getName().equals(transaction.getType()) || //
@@ -59,6 +72,10 @@ public class TableTransactionFilter extends ViewerFilter {
 		}
 
 		return matches;
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		changes.removePropertyChangeListener(listener);
 	}
 
 	@Override
@@ -149,5 +166,11 @@ public class TableTransactionFilter extends ViewerFilter {
 
 	public void setFilterByTransactionType(final String transactionType) {
 		filterByTransactionType = transactionType;
+	}
+
+	public void setFilterChanged(boolean b) {
+		boolean old = this.filterChanged;
+		this.filterChanged = b;
+		changes.firePropertyChange("filterChanged", old, filterChanged);
 	}
 }

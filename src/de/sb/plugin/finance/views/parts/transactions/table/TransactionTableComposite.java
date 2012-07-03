@@ -1,6 +1,7 @@
 package de.sb.plugin.finance.views.parts.transactions.table;
 
-import java.util.GregorianCalendar;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,28 +21,29 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import de.sb.plugin.finance.db.DatabaseOperations;
-import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.filters.TableTransactionFilter;
 import de.sb.plugin.finance.util.ElementToNodeParser;
 import de.sb.plugin.finance.util.LayoutFactory;
 import de.sb.plugin.finance.util.R;
 
-public class TransactionTableComposite {
+public class TransactionTableComposite implements PropertyChangeListener {
 	private final Composite content;
 	private final ElementToNodeParser parser;
-	private final List<Transaction> transactions;
 	private final int[] tableColumnWidths;
 	private final IWorkbenchPartSite site;
+	private final List<Transaction> transactions;
 	private final String[] tableColumnNames;
 	private final TableTransactionFilter filter;
 	private TreeViewer treeViewer;
 
-	public TransactionTableComposite(final Composite parent, final IWorkbenchPartSite workbenchSite) {
+	public TransactionTableComposite(final Composite parent, final IWorkbenchPartSite workbenchSite, final TableTransactionFilter filter) {
 		content = new Composite(parent, SWT.BORDER);
 		content.setLayout(new GridLayout(1, false));
-		filter = new TableTransactionFilter();
+		this.filter = filter;
 		site = workbenchSite;
+
+		filter.addPropertyChangeListener(this);
 
 		filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_CURRENTMONTH);
 
@@ -83,84 +85,32 @@ public class TransactionTableComposite {
 
 						switch (groupBy) {
 							case R.COMBO_TRANSACTION_GROUPBY_ACCOUNT:
+								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_BRANCH:
+								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_CATEGORY:
+								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_DATE:
 								treeViewer.setInput(parser.parseByDay());
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_MONTH:
+								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_NOTHING:
 								treeViewer.setInput(parser.parseByNothing());
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_TRANSACTION_TYPE:
+								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_WEEK:
 								treeViewer.setInput(parser.parseByWeek());
 								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_CURRENTDAY:
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_CURRENTDAY);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_CURRENTMONTH:
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_CURRENTMONTH);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_CURRENTQUARTER:
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_CURRENTQUARTER);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_CURRENTYEAR:
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_CURRENTYEAR);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_PREVIOUSMONTH:
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_PREVIOUSMONTH);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_PREVIOUSQUARTER:
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_PREVIOUSQUARTER);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_PREVIOUSYEAR:
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_PREVIOUSYEAR);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TIMESPAN_SELECT:
-								// TODO Daten aus Datenfeldern holen
-								filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
-								filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_SELECT);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TYPE_ALL:
-								filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_ALL);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TYPE_INCOME:
-								filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_INCOME);
-								treeViewer.refresh();
-								break;
-							case R.COMBO_TRANSACTION_TYPE_OUTCOME:
-								filter.setFilterByTransactionType(R.COMBO_TRANSACTION_TYPE_OUTCOME);
-								treeViewer.refresh();
-								break;
 							default:
 								break;
 						}
-					}
-					else if (o instanceof Account) {
-						filter.setFilterByAccount((Account) o);
-						treeViewer.refresh();
 					}
 				}
 			}
@@ -196,5 +146,13 @@ public class TransactionTableComposite {
 		TreeColumn col = tvCol.getColumn();
 		col.setText(columnName);
 		col.setWidth(columnWidth);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getPropertyName().equals("filterChanged") && event.getNewValue().toString().equals("true")) {
+			filter.setFilterChanged(false);
+			treeViewer.refresh();
+		}
 	}
 }
