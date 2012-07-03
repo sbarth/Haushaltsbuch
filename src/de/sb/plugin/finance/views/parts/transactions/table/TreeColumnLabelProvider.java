@@ -2,8 +2,10 @@ package de.sb.plugin.finance.views.parts.transactions.table;
 
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TreeNode;
+import org.eclipse.swt.graphics.Color;
 
 import de.sb.plugin.finance.entities.Transaction;
+import de.sb.plugin.finance.entities.TransactionType;
 import de.sb.plugin.finance.util.R;
 
 public class TreeColumnLabelProvider extends ColumnLabelProvider {
@@ -14,12 +16,29 @@ public class TreeColumnLabelProvider extends ColumnLabelProvider {
 	}
 
 	@Override
+	public Color getBackground(Object element) {
+		Object value = ((TreeNode) element).getValue();
+
+		if (value instanceof Transaction) {
+			String type = ((Transaction) value).getType();
+
+			if (TransactionType.FIX_INCOME.getName().equals(type) || TransactionType.INCOME.getName().equals(type)) {
+				return R.COLOR_TABLE_ITEM_INCOME;
+			} else if (TransactionType.FIX_OUTCOME.getName().equals(type) || TransactionType.OUTCOME.getName().equals(type)) {
+				return R.COLOR_TABLE_ITEM_OUTCOME;
+			}
+		}
+
+		return super.getBackground(element);
+	}
+
+	@Override
 	public String getText(final Object element) {
 		String result = "";
 
 		Object value = ((TreeNode) element).getValue();
 
-		if (value.getClass() == Transaction.class) {
+		if (value instanceof Transaction) {
 			Transaction transaction = (Transaction) value;
 
 			if (R.COLUMN_NAME_AMOUNT.equals(columnName)) {
@@ -37,7 +56,7 @@ public class TreeColumnLabelProvider extends ColumnLabelProvider {
 			if (R.COLUMN_NAME_TRANSACTIONTYPE.equals(columnName)) {
 				result = transaction.getType();
 			}
-		} else if (value.getClass() == String.class) {
+		} else if (value instanceof String) {
 			if (R.COLUMN_NAME_DATE.equals(columnName)) {
 				result = (String) value;
 			}

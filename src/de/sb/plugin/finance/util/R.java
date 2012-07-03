@@ -4,7 +4,15 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import org.eclipse.swt.graphics.Color;
+
 public class R {
+	/**
+	 * Farben
+	 */
+	public static final Color COLOR_TABLE_ITEM_INCOME = new Color(null, 0, 250, 154); // MediumSpringGreen
+	public static final Color COLOR_TABLE_ITEM_OUTCOME = new Color(null, 219, 112, 147); // PaleVioletRed
+
 	/**
 	 * Integer-Arrays
 	 */
