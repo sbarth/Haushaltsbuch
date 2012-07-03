@@ -1,2 +1,7 @@
-insert into category (name, parent_id) values ("Haushalt", 0);
-insert into category (name, parent_id) values ("Auto", 0);
+use finance_db;
+
+select * from category;
+
+delete from transaction where id > 0;
+delete from category where id > 0;
+delete from account where id > 0;

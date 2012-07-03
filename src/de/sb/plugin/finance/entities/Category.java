@@ -12,9 +12,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import de.sb.plugin.finance.util.Queries;
+
 @Entity
 @Table(name = "category")
-@NamedQuery(name = "findAllCategories", query = "select cat from Category cat")
+@NamedQuery(name = Queries.FIND_ALL_CATEGORIES, query = Queries.FIND_ALL_CATEGORY_QUERY)
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1421857784835172168L;
 

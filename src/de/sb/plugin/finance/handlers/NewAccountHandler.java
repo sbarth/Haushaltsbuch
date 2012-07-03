@@ -17,7 +17,6 @@ public class NewAccountHandler extends AbstractHandler {
 
 		if (result == Window.OK) {
 			DatabaseOperations ops = DatabaseOperations.getInstance();
-
 		}
 
 		return null;

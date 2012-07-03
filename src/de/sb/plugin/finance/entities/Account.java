@@ -15,9 +15,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import de.sb.plugin.finance.util.Queries;
+
 @Entity
 @Table(name = "account")
-@NamedQuery(name = "findAllAccounts", query = "select acc from Account acc")
+@NamedQuery(name = Queries.FIND_ALL_ACCOUNTS, query = Queries.FIND_ALL_ACCOUNTS_QUERY)
 public class Account implements Serializable {
 	private static final long serialVersionUID = 2353704457224727666L;
 

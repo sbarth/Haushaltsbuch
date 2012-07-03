@@ -7,7 +7,7 @@ create table ACCOUNT (
     name VARCHAR(100),
     description VARCHAR(1000),
     logo VARCHAR(1000),
-    start_amount DECIMAL,
+    start_amount DECIMAL(8,2) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -23,7 +23,7 @@ create table TRANSACTION(
 	account_id INT NOT NULL,
 	category_id INT NOT NULL,
 	parent_id INT,
-	amount DECIMAL,
+	amount DECIMAL(8,2) NOT NULL,
 	description VARCHAR(1000),
 	date DATETIME,
   type VARCHAR(50),

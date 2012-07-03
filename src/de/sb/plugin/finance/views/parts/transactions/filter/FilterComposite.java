@@ -3,6 +3,7 @@ package de.sb.plugin.finance.views.parts.transactions.filter;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -12,13 +13,15 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPartSite;
 
+import de.sb.plugin.finance.db.DatabaseOperations;
+import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.util.LayoutFactory;
 import de.sb.plugin.finance.util.R;
 import de.sb.plugin.finance.util.SelectionProviderIntermediate;
 
 public class FilterComposite {
-	private Composite content;
-	private IWorkbenchPartSite site;
+	private final Composite content;
+	private final IWorkbenchPartSite site;
 
 	public FilterComposite(final Composite parent, final IWorkbenchPartSite site) {
 		content = new Composite(parent, SWT.BORDER);
@@ -52,14 +55,30 @@ public class FilterComposite {
 		final ComboViewer account = new ComboViewer(content, SWT.READ_ONLY);
 		account.getCombo().setLayoutData(gd);
 		account.setContentProvider(ArrayContentProvider.getInstance());
-		account.setInput(R.COMBO_TRANSACTION_ACCOUNT);
+		account.setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				String text = "";
+				if (element instanceof Account) {
+					Account acc = (Account) element;
+					text = acc.getName();
+
+					if (acc.getDescription() != null && !acc.getDescription().isEmpty()) {
+						text += " - " + acc.getDescription();
+					}
+				}
+
+				return text;
+			}
+		});
+		account.setInput(DatabaseOperations.getInstance().getAllAccounts(true));
 		account.addSelectionChangedListener(new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(final SelectionChangedEvent event) {
 				provider.setSelectionProviderDelegate(account);
 			}
 		});
-		account.getCombo().setEnabled(false);
+		account.getCombo().select(1);
 
 		final ComboViewer transactionType = new ComboViewer(content, SWT.READ_ONLY);
 		transactionType.getCombo().setLayoutData(gd);

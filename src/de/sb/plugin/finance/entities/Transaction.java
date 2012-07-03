@@ -11,11 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import de.sb.plugin.finance.util.Queries;
+
 @Entity
 @Table(name = "transaction")
+@NamedQuery(name = Queries.FIND_ALL_TRANSACTIONS, query = Queries.FIND_ALL_TRANSACTIONS_QUERY)
 public class Transaction implements Serializable {
 	private static final long serialVersionUID = -5996366282282751725L;
 

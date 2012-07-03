@@ -6,12 +6,18 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.entities.Category;
 import de.sb.plugin.finance.entities.Transaction;
+import de.sb.plugin.finance.entities.TransactionType;
 
 public class DummyData {
 	private static List<Category> categories;
+
+	private static String[] description = {
+			"Das ", "geht ", "niemandem ", "etwas ", "an ", "oder ", "irre ", "ich ", "mich ", "da ", "so ", "sehr ",
+	};
 
 	static {
 		categories = new ArrayList<Category>();
@@ -20,7 +26,9 @@ public class DummyData {
 
 	public static Account createAccount(final String name, final int transactionSize) {
 		Account account = new Account();
-		account.setDescription("");
+		account.setDescription("Dresden");
+		account.setLogo("");
+		account.setStartAmount(new BigDecimal("10000.00"));
 		account.setName(name);
 
 		for (int index = 0; index < transactionSize; index++) {
@@ -38,6 +46,13 @@ public class DummyData {
 	}
 
 	private static void createCategories() {
+		DatabaseOperations ops = DatabaseOperations.getInstance();
+		categories = ops.getAllCategories();
+
+		if (categories != null && categories.size() > 0) {
+			return;
+		}
+
 		Category allgemein = new Category(null, "Allgemein");
 		Category auszahlung = new Category(allgemein, "Auszahlung");
 		Category einzahlung = new Category(allgemein, "Einzahlung");
@@ -50,7 +65,7 @@ public class DummyData {
 		Category auto = new Category(null, "Auto");
 		Category benzin = new Category(auto, "Benzin");
 		Category bussgeld = new Category(auto, "Buﬂgeld");
-		Category steuer = new Category(auto, "steuer");
+		Category steuer = new Category(auto, "Steuer");
 
 		categories.add(allgemein);
 		categories.add(auszahlung);
@@ -63,6 +78,17 @@ public class DummyData {
 		categories.add(benzin);
 		categories.add(bussgeld);
 		categories.add(steuer);
+
+		ops.insert(auszahlung);
+		ops.insert(einzahlung);
+		ops.insert(accessoires);
+		ops.insert(kleidung);
+		ops.insert(schuhe);
+		ops.insert(benzin);
+		ops.insert(bussgeld);
+		ops.insert(steuer);
+
+		categories = ops.getAllCategories();
 	}
 
 	private static Calendar createDate() {
@@ -87,11 +113,23 @@ public class DummyData {
 		Calendar cal = createDate();
 		transaction.setDate(cal);
 
-		// int index = Double.valueOf(Math.random() * TransactionType.values().length).intValue();
+		int index = Double.valueOf(Math.random() * TransactionType.values().length).intValue();
 
-		transaction.setDescription("keine");
-		// transaction.setType(TransactionType.values()[index]);
+		transaction.setDescription(getRandomDescription());
+		transaction.setType(TransactionType.values()[index].getName());
 
 		return transaction;
+	}
+
+	private static String getRandomDescription() {
+		int length = Double.valueOf(Math.random() * description.length).intValue();
+		String desc = "";
+
+		for (int i = 0; i < length; i++) {
+			int index = Double.valueOf(Math.random() * description.length).intValue();
+			desc += description[index];
+		}
+
+		return desc;
 	}
 }

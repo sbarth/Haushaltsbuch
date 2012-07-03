@@ -19,7 +19,7 @@ import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 
-import de.sb.plugin.finance.dummy.DummyData;
+import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.filters.TableTransactionFilter;
 import de.sb.plugin.finance.util.ElementToNodeParser;
@@ -27,13 +27,13 @@ import de.sb.plugin.finance.util.LayoutFactory;
 import de.sb.plugin.finance.util.R;
 
 public class TransactionTableComposite {
-	private Composite content;
-	private ElementToNodeParser parser;
-	private List<Transaction> transactions;
-	private int[] tableColumnWidths;
-	private IWorkbenchPartSite site;
-	private String[] tableColumnNames;
-	private TableTransactionFilter filter;
+	private final Composite content;
+	private final ElementToNodeParser parser;
+	private final List<Transaction> transactions;
+	private final int[] tableColumnWidths;
+	private final IWorkbenchPartSite site;
+	private final String[] tableColumnNames;
+	private final TableTransactionFilter filter;
 	private TreeViewer treeViewer;
 
 	public TransactionTableComposite(final Composite parent, final IWorkbenchPartSite workbenchSite) {
@@ -54,7 +54,8 @@ public class TransactionTableComposite {
 			throw new RuntimeException("Anzahl der Spaltennamen stimmt nicht mit Anzahl der Spaltenbreiten überein!");
 		}
 
-		transactions = DummyData.createAccount("Sparkasse", 10000).getTransactions();
+		transactions = DatabaseOperations.getInstance().getAllTransactions();
+
 		parser = new ElementToNodeParser(transactions);
 
 		addSelectionListener();
