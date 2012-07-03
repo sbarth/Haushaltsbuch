@@ -63,7 +63,11 @@ public class TableTransactionFilter extends ViewerFilter {
 			}
 		}
 		if (filterBySearch != null && !filterBySearch.isEmpty()) {
-			matches = matches && transaction.getCategory().toString().toLowerCase().contains(filterBySearch.toLowerCase());
+			boolean matchesSearch = transaction.getCategory().toString().toLowerCase().contains(filterBySearch.toLowerCase());
+			matchesSearch = matchesSearch || transaction.getDescription().toLowerCase().contains(filterBySearch.toLowerCase());
+			matchesSearch = matchesSearch || transaction.getType().toLowerCase().contains(filterBySearch.toLowerCase());
+
+			matches = matches && matchesSearch;
 		}
 		if (filterByTransactionType != null && !filterByTransactionType.equals("")) {
 			if (filterByTransactionType.equals(R.COMBO_TRANSACTION_TYPE_INCOME)) {
