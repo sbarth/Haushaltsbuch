@@ -20,6 +20,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import de.sb.plugin.finance.db.DatabaseOperations;
+import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.filters.TableTransactionFilter;
 import de.sb.plugin.finance.util.ElementToNodeParser;
@@ -156,6 +157,10 @@ public class TransactionTableComposite {
 							default:
 								break;
 						}
+					}
+					else if (o instanceof Account) {
+						filter.setFilterByAccount((Account) o);
+						treeViewer.refresh();
 					}
 				}
 			}

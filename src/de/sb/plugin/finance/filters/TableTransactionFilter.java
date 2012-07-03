@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
+import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.entities.TransactionType;
 import de.sb.plugin.finance.util.Compare;
@@ -15,7 +16,7 @@ import de.sb.plugin.finance.util.R;
 public class TableTransactionFilter extends ViewerFilter {
 	private Calendar calFrom;
 	private Calendar calTo;
-	private String filterByAccount;
+	private Account filterByAccount;
 	private String filterByDate;
 	private String filterBySearch;
 	private String filterByTransactionType;
@@ -36,12 +37,15 @@ public class TableTransactionFilter extends ViewerFilter {
 	public boolean matches(final Transaction transaction) {
 		boolean matches = true;
 
+		if (filterByAccount != null && filterByAccount.getId() != 0) {
+			matches = matches && (transaction.getAccount().getId() == filterByAccount.getId());
+		}
 		if (filterByDate != null && !filterByDate.equals("")) {
 			if (calFrom != null && calTo != null) {
 				boolean from = Compare.areOnSameDay(calFrom, transaction.getDate());
 				boolean to = Compare.areOnSameDay(calTo, transaction.getDate());
 
-				matches = calFrom.before(transaction.getDate()) && calTo.after(transaction.getDate()) || from || to;
+				matches = matches && (calFrom.before(transaction.getDate()) && calTo.after(transaction.getDate()) || from || to);
 			}
 		}
 		if (filterByTransactionType != null && !filterByTransactionType.equals("")) {
@@ -81,8 +85,8 @@ public class TableTransactionFilter extends ViewerFilter {
 		this.calTo = calTo;
 	}
 
-	public void setFilterByAccount(final String account) {
-		filterByAccount = account;
+	public void setFilterByAccount(final Account o) {
+		filterByAccount = o;
 	}
 
 	public void setFilterByDate(final String date) {

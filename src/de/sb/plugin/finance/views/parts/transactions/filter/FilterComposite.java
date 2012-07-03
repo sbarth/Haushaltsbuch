@@ -78,7 +78,7 @@ public class FilterComposite {
 				provider.setSelectionProviderDelegate(account);
 			}
 		});
-		account.getCombo().select(1);
+		account.getCombo().select(0);
 
 		final ComboViewer transactionType = new ComboViewer(content, SWT.READ_ONLY);
 		transactionType.getCombo().setLayoutData(gd);
