@@ -17,7 +17,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -25,7 +24,8 @@ import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.listener.CurrencyVerifyListener;
 import de.sb.plugin.finance.listener.ValueMatchCurrencyStrategy;
 import de.sb.plugin.finance.listener.ValueNotEmptyStrategy;
-import de.sb.plugin.finance.util.LayoutFactory;
+import de.sb.plugin.finance.ui.common.LayoutFactory;
+import de.sb.plugin.finance.ui.common.SwtWidgetFactory;
 import de.sb.plugin.finance.util.R;
 
 @SuppressWarnings("restriction")
@@ -88,26 +88,14 @@ public class NewAccountDialog extends TitleAreaDialog {
 		// cvLogo.getCombo().setLayoutData(gdRightSide);
 		// cvLogo.setContentProvider(ArrayContentProvider.getInstance());
 
-		Label lblName = new Label(comp, SWT.NONE);
-		lblName.setLayoutData(gdLabels);
-		lblName.setText(R.LABEL_DIALOG_NEW_ACCOUNT_NAME);
+		SwtWidgetFactory.createLabel(comp, R.LABEL_DIALOG_NEW_ACCOUNT_NAME, gdLabels);
+		txtName = SwtWidgetFactory.createText(comp, gdRightSide);
 
-		txtName = new Text(comp, SWT.BORDER);
-		txtName.setLayoutData(gdRightSide);
+		SwtWidgetFactory.createLabel(comp, R.LABEL_DIALOG_NEW_ACCOUNT_DESCRIPTION, gdLabels);
+		txtDescription = SwtWidgetFactory.createText(comp, gdRightSide);
 
-		Label lblDescription = new Label(comp, SWT.NONE);
-		lblDescription.setLayoutData(gdLabels);
-		lblDescription.setText(R.LABEL_DIALOG_NEW_ACCOUNT_DESCRIPTION);
-
-		txtDescription = new Text(comp, SWT.BORDER);
-		txtDescription.setLayoutData(gdRightSide);
-
-		Label lblStartAmount = new Label(comp, SWT.NONE);
-		lblStartAmount.setLayoutData(gdLabels);
-		lblStartAmount.setText(R.LABEL_DIALOG_NEW_ACCOUNT_STARTAMOUNT);
-
-		txtStartAmount = new Text(comp, SWT.BORDER);
-		txtStartAmount.setLayoutData(gdRightSide);
+		SwtWidgetFactory.createLabel(comp, R.LABEL_DIALOG_NEW_ACCOUNT_STARTAMOUNT, gdLabels);
+		txtStartAmount = SwtWidgetFactory.createText(comp, gdRightSide);
 		txtStartAmount.addVerifyListener(new CurrencyVerifyListener());
 
 		return parent;
