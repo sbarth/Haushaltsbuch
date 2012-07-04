@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.entities.TransactionType;
+import de.sb.plugin.finance.ui.common.TableTransactionFilter;
 import de.sb.plugin.finance.util.R;
 
 public class TestTableTransactionFilterByTransactionType {

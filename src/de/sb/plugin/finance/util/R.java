@@ -69,6 +69,7 @@ public class R {
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_VAROUTCOME = "Einmailige Ausgaben:";
 
 	public static final String TITLE_DIALOG_NEW_ACCOUNT = "Erstelle neues Konto";
+	public static final String TITLE_DIALOG_NEW_TRANSACTION = "Erstelle neue Buchung";
 
 	/**
 	 * String-Arrays

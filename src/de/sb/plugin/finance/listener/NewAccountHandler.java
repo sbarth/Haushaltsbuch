@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Account;
-import de.sb.plugin.finance.views.dialogs.NewAccountDialog;
+import de.sb.plugin.finance.ui.dialogs.NewAccountDialog;
 
 public class NewAccountHandler extends AbstractHandler {
 	@Override

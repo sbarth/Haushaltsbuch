@@ -15,7 +15,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             name="RCP Perspective"
-            class="de.sb.plugin.finance.perspectives.Perspective"
+            class="de.sb.plugin.finance.ui.Perspective"
             id="de.sb.plugin.finance.perspective">
       </perspective>
    </extension>
@@ -23,14 +23,14 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="false"
-            class="de.sb.plugin.finance.views.TransactionList"
+            class="de.sb.plugin.finance.ui.TransactionListView"
             id="de.sb.plugin.finance.views.TransactionList"
             name="Buchungen"
             restorable="true">
       </view>
       <view
             allowMultiple="false"
-            class="de.sb.plugin.finance.views.Statistics"
+            class="de.sb.plugin.finance.ui.StatisticsView"
             id="de.sb.plugin.finance.views.Statistics"
             name="Statistik"
             restorable="true">

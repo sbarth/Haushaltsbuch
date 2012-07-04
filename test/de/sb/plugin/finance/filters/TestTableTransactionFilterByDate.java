@@ -7,6 +7,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import de.sb.plugin.finance.ui.common.TableTransactionFilter;
 import de.sb.plugin.finance.util.Compare;
 import de.sb.plugin.finance.util.R;
 

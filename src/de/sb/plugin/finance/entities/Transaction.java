@@ -20,7 +20,7 @@ import de.sb.plugin.finance.util.Queries;
 @Entity
 @Table(name = "transaction")
 @NamedQuery(name = Queries.FIND_ALL_TRANSACTIONS, query = Queries.FIND_ALL_TRANSACTIONS_QUERY)
-public class Transaction implements Serializable {
+public class Transaction extends AbstractBean implements Serializable {
 	private static final long serialVersionUID = -5996366282282751725L;
 
 	@Column(name = "account_id")
