@@ -20,7 +20,7 @@ import de.sb.plugin.finance.util.Queries;
 @Entity
 @Table(name = "account")
 @NamedQuery(name = Queries.FIND_ALL_ACCOUNTS, query = Queries.FIND_ALL_ACCOUNTS_QUERY)
-public class Account implements Serializable {
+public class Account extends AbstractBean implements Serializable {
 	private static final long serialVersionUID = 2353704457224727666L;
 
 	@Id
@@ -80,7 +80,9 @@ public class Account implements Serializable {
 	}
 
 	public void setDescription(final String description) {
+		String old = this.description;
 		this.description = description;
+		changes.firePropertyChange("description", old, description);
 	}
 
 	public void setId(final long id) {
@@ -88,15 +90,21 @@ public class Account implements Serializable {
 	}
 
 	public void setLogo(final String logo) {
+		String old = this.logo;
 		this.logo = logo;
+		changes.firePropertyChange("logo", old, logo);
 	}
 
 	public void setName(final String name) {
+		String old = this.name;
 		this.name = name;
+		changes.firePropertyChange("name", old, name);
 	}
 
 	public void setStartAmount(final BigDecimal startAmount) {
+		BigDecimal old = this.startAmount;
 		this.startAmount = startAmount;
+		changes.firePropertyChange("startAmount", old, startAmount);
 	}
 
 	public void setTransactions(final List<Transaction> transactions) {

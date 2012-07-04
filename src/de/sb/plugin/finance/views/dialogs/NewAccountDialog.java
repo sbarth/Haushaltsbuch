@@ -1,14 +1,23 @@
 package de.sb.plugin.finance.views.dialogs;
 
-import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
+import org.eclipse.core.databinding.Binding;
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.beans.BeanProperties;
+import org.eclipse.core.databinding.validation.ValidationStatus;
+import org.eclipse.core.internal.databinding.BindingStatus;
+import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
-import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -16,17 +25,43 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.sb.plugin.finance.entities.Account;
+import de.sb.plugin.finance.listener.CurrencyVerifyListener;
+import de.sb.plugin.finance.listener.ValueMatchCurrencyStrategy;
+import de.sb.plugin.finance.listener.ValueNotEmptyStrategy;
 import de.sb.plugin.finance.util.LayoutFactory;
 import de.sb.plugin.finance.util.R;
 
+@SuppressWarnings("restriction")
 public class NewAccountDialog extends TitleAreaDialog {
+	private final Account account;
 	private ComboViewer cvLogo;
 	private Text txtDescription;
 	private Text txtName;
 	private Text txtStartAmount;
+	private Binding bindName;
+	private Binding bindStartAmount;
 
 	public NewAccountDialog(final Shell parentShell) {
 		super(parentShell);
+
+		this.account = new Account();
+	}
+
+	private boolean checkSeverity(List<BindingStatus> statusList) {
+		for (BindingStatus status : statusList) {
+			if (status.getSeverity() != ValidationStatus.ok().getSeverity()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public void create() {
+		super.create();
+
+		setBinding();
 	}
 
 	@Override
@@ -47,13 +82,14 @@ public class NewAccountDialog extends TitleAreaDialog {
 		GridData gdLabels = LayoutFactory.createGridData(false, false, GridData.GRAB_HORIZONTAL, GridData.GRAB_VERTICAL);
 		GridData gdRightSide = LayoutFactory.createGridData(true, false, GridData.FILL, GridData.GRAB_VERTICAL);
 
-		Label lblLogo = new Label(comp, SWT.NONE);
-		lblLogo.setLayoutData(gdLabels);
-		lblLogo.setText(R.LABEL_DIALOG_NEW_ACCOUNT_LOGO);
-
-		cvLogo = new ComboViewer(comp, SWT.READ_ONLY);
-		cvLogo.getCombo().setLayoutData(gdRightSide);
-		cvLogo.setContentProvider(ArrayContentProvider.getInstance()); // TODO Liste befüllen
+		// TODO Logo einbauen
+		// Label lblLogo = new Label(comp, SWT.NONE);
+		// lblLogo.setLayoutData(gdLabels);
+		// lblLogo.setText(R.LABEL_DIALOG_NEW_ACCOUNT_LOGO);
+		//
+		// cvLogo = new ComboViewer(comp, SWT.READ_ONLY);
+		// cvLogo.getCombo().setLayoutData(gdRightSide);
+		// cvLogo.setContentProvider(ArrayContentProvider.getInstance());
 
 		Label lblName = new Label(comp, SWT.NONE);
 		lblName.setLayoutData(gdLabels);
@@ -75,22 +111,43 @@ public class NewAccountDialog extends TitleAreaDialog {
 
 		txtStartAmount = new Text(comp, SWT.BORDER);
 		txtStartAmount.setLayoutData(gdRightSide);
+		txtStartAmount.addVerifyListener(new CurrencyVerifyListener());
 
 		return parent;
 	}
 
 	public Account getAccount() {
-		Account acc = new Account();
-		acc.setDescription("Test");
-		acc.setLogo("keins"); // TODO Bild aus Combo herausziehen
-		acc.setName("Test");
-		acc.setStartAmount(new BigDecimal("0"));
-
-		return acc;
+		return account;
 	}
 
 	@Override
 	protected Point getInitialSize() {
 		return new Point(400, 300);
+	}
+
+	@Override
+	protected void okPressed() {
+		BindingStatus statusName = (BindingStatus) bindName.getValidationStatus().getValue();
+		BindingStatus statusStartAmount = (BindingStatus) bindStartAmount.getValidationStatus().getValue();
+
+		if (checkSeverity(Arrays.asList(statusName, statusStartAmount))) {
+			super.okPressed();
+		}
+	}
+
+	private void setBinding() {
+		DataBindingContext ctx = new DataBindingContext();
+
+		Button bOk = getButton(Window.OK);
+		bindName = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtName), BeanProperties.value("name").observe(account), new ValueNotEmptyStrategy(bOk), null);
+		ControlDecorationSupport.create(bindName, SWT.TOP | SWT.RIGHT);
+
+		Binding bindDescription = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtDescription), BeanProperties.value("description").observe(account));
+
+		bindStartAmount = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtStartAmount), BeanProperties.value("startAmount").observe(account), new ValueMatchCurrencyStrategy(bOk), null);
+		ControlDecorationSupport.create(bindStartAmount, SWT.TOP | SWT.RIGHT);
+
+		// ctx.bindValue(WidgetProperties.text(SWT.Selection).observe(cvLogo),
+		// BeanProperties.value("logo").observe(account)); //TODO Logo einbauen
 	}
 }

@@ -73,7 +73,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="de.sb.plugin.finance.handlers.NewAccountHandler"
+            class="de.sb.plugin.finance.listener.NewAccountHandler"
             commandId="de.sb.plugin.finance.command.newaccount">
       </handler>
    </extension>
