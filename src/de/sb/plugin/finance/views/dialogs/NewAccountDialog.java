@@ -12,12 +12,10 @@ import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -138,14 +136,15 @@ public class NewAccountDialog extends TitleAreaDialog {
 	private void setBinding() {
 		DataBindingContext ctx = new DataBindingContext();
 
-		Button bOk = getButton(Window.OK);
-		bindName = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtName), BeanProperties.value("name").observe(account), new ValueNotEmptyStrategy(bOk), null);
+		// Binding mit Validierung
+		bindName = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtName), BeanProperties.value("name").observe(account), new ValueNotEmptyStrategy(), null);
 		ControlDecorationSupport.create(bindName, SWT.TOP | SWT.RIGHT);
 
-		Binding bindDescription = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtDescription), BeanProperties.value("description").observe(account));
-
-		bindStartAmount = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtStartAmount), BeanProperties.value("startAmount").observe(account), new ValueMatchCurrencyStrategy(bOk), null);
+		bindStartAmount = ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtStartAmount), BeanProperties.value("startAmount").observe(account), new ValueMatchCurrencyStrategy(), null);
 		ControlDecorationSupport.create(bindStartAmount, SWT.TOP | SWT.RIGHT);
+
+		// Binding ohne Validierung
+		ctx.bindValue(WidgetProperties.text(SWT.Modify).observe(txtDescription), BeanProperties.value("description").observe(account));
 
 		// ctx.bindValue(WidgetProperties.text(SWT.Selection).observe(cvLogo),
 		// BeanProperties.value("logo").observe(account)); //TODO Logo einbauen
