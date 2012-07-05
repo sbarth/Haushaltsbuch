@@ -55,6 +55,13 @@ public class R {
 	public static final String LABEL_DIALOG_NEW_ACCOUNT_LOGO = "Logo:";
 	public static final String LABEL_DIALOG_NEW_ACCOUNT_NAME = "Name:";
 	public static final String LABEL_DIALOG_NEW_ACCOUNT_STARTAMOUNT = "Startbetrag:";
+	public static final String LABEL_DIALOG_NEW_TRANSACTION_ACCOUNT = "Konto: ";
+	public static final String LABEL_DIALOG_NEW_TRANSACTION_AMOUNT = "Betrag: ";
+	public static final String LABEL_DIALOG_NEW_TRANSACTION_CATEGORY = "Kategorie: ";
+	public static final String LABEL_DIALOG_NEW_TRANSACTION_DATE = "Datum: ";
+	public static final String LABEL_DIALOG_NEW_TRANSACTION_DESCRIPTION = "Beschreibung: ";
+	public static final String LABEL_DIALOG_NEW_TRANSACTION_TO = "auf: ";
+	public static final String LABEL_DIALOG_NEW_TRANSACTION_TRANSACTION_TYPE = "Buchungstyp: ";
 	public static final String LABEL_FILTER_COMPOSITE_ACCOUNT = "Konto:";
 	public static final String LABEL_FILTER_COMPOSITE_GROUPBY = "Gruppierung:";
 	public static final String LABEL_FILTER_COMPOSITE_SEARCH = "Suche:";
@@ -70,6 +77,12 @@ public class R {
 
 	public static final String TITLE_DIALOG_NEW_ACCOUNT = "Erstelle neues Konto";
 	public static final String TITLE_DIALOG_NEW_TRANSACTION = "Erstelle neue Buchung";
+
+	public static final String TRANSACTION_TYPE_FIX_INCOME = "Einnahme (Fix)";
+	public static final String TRANSACTION_TYPE_FIX_OUTCOME = "Ausgabe (Fix)";
+	public static final String TRANSACTION_TYPE_INCOME = "Einnahme";
+	public static final String TRANSACTION_TYPE_OUTCOME = "Ausgabe";
+	public static final String TRANSACTION_TYPE_TRANSFER = "Umbuchung";
 
 	/**
 	 * String-Arrays

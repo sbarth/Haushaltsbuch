@@ -52,6 +52,7 @@
             <command
                   commandId="de.sb.plugin.finance.command.newtransaction"
                   icon="icons/alt_window_16.gif"
+                  mnemonic="B"
                   style="push">
             </command>
          </toolbar>
@@ -75,6 +76,10 @@
       <handler
             class="de.sb.plugin.finance.listener.NewAccountDialogHandler"
             commandId="de.sb.plugin.finance.command.newaccount">
+      </handler>
+      <handler
+            class="de.sb.plugin.finance.listener.NewTransactionDialogHandler"
+            commandId="de.sb.plugin.finance.command.newtransaction">
       </handler>
    </extension>
    <extension

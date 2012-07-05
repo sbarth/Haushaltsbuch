@@ -48,6 +48,10 @@ public class Transaction extends AbstractBean implements Serializable {
 	@Column(name = "type")
 	private String type;
 
+	@Column(name = "parent_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	private Transaction transfer;
+
 	public Transaction() {}
 
 	public Account getAccount() {
@@ -74,36 +78,58 @@ public class Transaction extends AbstractBean implements Serializable {
 		return id;
 	}
 
+	public Transaction getTransfer() {
+		return transfer;
+	}
+
 	public String getType() {
 		return type;
 	}
 
 	public void setAccount(final Account account) {
+		Account old = this.account;
 		this.account = account;
+		changes.firePropertyChange("account", old, account);
 	}
 
 	public void setAmount(final BigDecimal amount) {
+		BigDecimal old = this.amount;
 		this.amount = amount;
+		changes.firePropertyChange("amount", old, amount);
 	}
 
 	public void setCategory(final Category category) {
+		Category old = this.category;
 		this.category = category;
+		changes.firePropertyChange("category", old, category);
 	}
 
 	public void setDate(final Calendar date) {
+		Calendar old = this.date;
 		this.date = date;
+		changes.firePropertyChange("date", old, date);
 	}
 
 	public void setDescription(final String description) {
+		String old = this.description;
 		this.description = description;
+		changes.firePropertyChange("description", old, description);
 	}
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
+	public void setTransfer(Transaction transfer) {
+		Transaction old = this.transfer;
+		this.transfer = transfer;
+		changes.firePropertyChange("transfer", old, transfer);
+	}
+
 	public void setType(final String type) {
+		String old = this.type;
 		this.type = type;
+		changes.firePropertyChange("type", old, type);
 	}
 
 	@Override

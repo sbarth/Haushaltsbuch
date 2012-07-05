@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
+
 import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.entities.Category;
 import de.sb.plugin.finance.entities.Transaction;
@@ -13,6 +15,7 @@ import de.sb.plugin.finance.util.R;
 
 public class DatabaseOperations {
 	private volatile static DatabaseOperations dbOps;
+	private static final Logger LOGGER = Logger.getLogger(DatabaseOperations.class);
 
 	public static DatabaseOperations getInstance() {
 		if (dbOps == null) {
@@ -71,9 +74,23 @@ public class DatabaseOperations {
 		return transaction;
 	}
 
+	public void insert(final List<?> list) {
+		EntityManager manager = handler.openEntityTransaction();
+
+		for (Object o : list) {
+			LOGGER.info("Speichere '" + o + "' in DB");
+			manager.merge(o);
+		}
+
+		handler.closeEntityTransaction();
+	}
+
 	public void insert(final Object o) {
 		EntityManager manager = handler.openEntityTransaction();
+
+		LOGGER.info("Speichere '" + o + "' in DB");
 		manager.merge(o);
+
 		handler.closeEntityTransaction();
 	}
 }

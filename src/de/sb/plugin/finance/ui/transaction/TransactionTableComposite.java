@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
@@ -20,6 +21,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import de.sb.plugin.finance.db.DatabaseOperations;
+import de.sb.plugin.finance.dummy.DummyData;
 import de.sb.plugin.finance.ui.common.ElementToNodeParser;
 import de.sb.plugin.finance.ui.common.LayoutFactory;
 import de.sb.plugin.finance.ui.common.TableTransactionFilter;
@@ -47,6 +49,11 @@ public class TransactionTableComposite implements PropertyChangeListener {
 
 		if (tableColumnNames.length != tableColumnWidths.length) {
 			throw new RuntimeException("Anzahl der Spaltennamen stimmt nicht mit Anzahl der Spaltenbreiten überein!");
+		}
+
+		// TODO Am Ende löschen
+		if (DatabaseOperations.getInstance().getAllTransactions().size() == 0) {
+			DummyData.insertTransactions(1000);
 		}
 
 		parser = new ElementToNodeParser(DatabaseOperations.getInstance().getAllTransactions());
@@ -84,19 +91,19 @@ public class TransactionTableComposite implements PropertyChangeListener {
 								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_DATE:
-								treeViewer.setInput(parser.parseByDay());
+								setInput(parser.parseByDay());
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_MONTH:
 								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_NOTHING:
-								treeViewer.setInput(parser.parseByNothing());
+								setInput(parser.parseByNothing());
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_TRANSACTION_TYPE:
 								// TODO GrouBy implementieren
 								break;
 							case R.COMBO_TRANSACTION_GROUPBY_WEEK:
-								treeViewer.setInput(parser.parseByWeek());
+								setInput(parser.parseByWeek());
 								break;
 							default:
 								break;
@@ -125,7 +132,7 @@ public class TransactionTableComposite implements PropertyChangeListener {
 		tree.setLayoutData(gd);
 
 		treeViewer.addFilter(filter);
-		treeViewer.setInput(parser.parseByDay());
+		setInput(parser.parseByDay());
 	}
 
 	private void createTreeViewerColumn(final String columnName, final int columnWidth) {
@@ -150,6 +157,12 @@ public class TransactionTableComposite implements PropertyChangeListener {
 			} else {
 				treeViewer.collapseAll();
 			}
+		}
+	}
+
+	private void setInput(TreeNode treeNode) {
+		if (treeNode.getChildren() != null) {
+			treeViewer.setInput(treeNode);
 		}
 	}
 }

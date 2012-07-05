@@ -1,10 +1,13 @@
 package de.sb.plugin.finance.entities;
 
+import de.sb.plugin.finance.util.R;
+
 public enum TransactionType {
-	FIX_INCOME("Einnahme (Fix)"),
-	FIX_OUTCOME("Ausgabe (Fix)"),
-	INCOME("Einnahme (Variabel)"),
-	OUTCOME("Ausgabe (Variabel)"), ;
+	FIX_INCOME(R.TRANSACTION_TYPE_FIX_INCOME),
+	FIX_OUTCOME(R.TRANSACTION_TYPE_FIX_OUTCOME),
+	INCOME(R.TRANSACTION_TYPE_INCOME),
+	OUTCOME(R.TRANSACTION_TYPE_OUTCOME),
+	TRANSFER(R.TRANSACTION_TYPE_TRANSFER), ;
 
 	private String name;
 

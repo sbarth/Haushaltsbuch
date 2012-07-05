@@ -21,11 +21,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.sb.plugin.finance.entities.Account;
-import de.sb.plugin.finance.listener.CurrencyVerifyListener;
-import de.sb.plugin.finance.listener.ValueMatchCurrencyStrategy;
-import de.sb.plugin.finance.listener.ValueNotEmptyStrategy;
 import de.sb.plugin.finance.ui.common.LayoutFactory;
 import de.sb.plugin.finance.ui.common.SwtWidgetFactory;
+import de.sb.plugin.finance.ui.strategy.ValueMatchCurrencyStrategy;
+import de.sb.plugin.finance.ui.strategy.ValueNotEmptyStrategy;
 import de.sb.plugin.finance.util.R;
 
 @SuppressWarnings("restriction")
@@ -95,8 +94,7 @@ public class NewAccountDialog extends TitleAreaDialog {
 		txtDescription = SwtWidgetFactory.createText(comp, gdRightSide);
 
 		SwtWidgetFactory.createLabel(comp, R.LABEL_DIALOG_NEW_ACCOUNT_STARTAMOUNT, gdLabels);
-		txtStartAmount = SwtWidgetFactory.createText(comp, gdRightSide);
-		txtStartAmount.addVerifyListener(new CurrencyVerifyListener());
+		txtStartAmount = SwtWidgetFactory.createCurrencyText(comp, gdRightSide);
 
 		return parent;
 	}
