@@ -1,6 +1,7 @@
 package de.sb.plugin.finance.ui.transaction;
 
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 import org.eclipse.jface.viewers.ComboViewer;
@@ -66,6 +67,7 @@ public class FilterComposite {
 				provider.setSelectionProviderDelegate(groupBy);
 			}
 		});
+		// site.setSelectionProvider(groupBy); ausreichend
 		groupBy.getCombo().select(1);
 
 		cvAccount = SwtWidgetFactory.createComboViewer(content, DatabaseOperations.getInstance().getAllAccounts(true), gd, new AccountLabelProvider());
@@ -123,6 +125,7 @@ public class FilterComposite {
 				if (cv == cvTransactionType) {
 					filter.setFilterByTransactionType(value);
 				} else if (cv == cvTimespan) {
+					filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
 					filter.setFilterByDate(value);
 				}
 			} else if (o instanceof Account) {

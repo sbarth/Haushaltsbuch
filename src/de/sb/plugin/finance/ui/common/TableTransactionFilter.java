@@ -64,7 +64,8 @@ public class TableTransactionFilter extends ViewerFilter {
 		}
 		if (filterBySearch != null && !filterBySearch.isEmpty()) {
 			boolean matchesSearch = transaction.getCategory().toString().toLowerCase().contains(filterBySearch.toLowerCase());
-			matchesSearch = matchesSearch || transaction.getDescription().toLowerCase().contains(filterBySearch.toLowerCase());
+			matchesSearch = matchesSearch || (transaction.getDescription() != null && //
+					transaction.getDescription().toLowerCase().contains(filterBySearch.toLowerCase()));
 			matchesSearch = matchesSearch || transaction.getType().toLowerCase().contains(filterBySearch.toLowerCase());
 
 			matches = matches && matchesSearch;

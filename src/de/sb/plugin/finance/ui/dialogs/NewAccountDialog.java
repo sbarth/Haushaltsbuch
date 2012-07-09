@@ -1,16 +1,13 @@
 package de.sb.plugin.finance.ui.dialogs;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.BeanProperties;
-import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.internal.databinding.BindingStatus;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -28,7 +25,7 @@ import de.sb.plugin.finance.ui.strategy.ValueNotEmptyStrategy;
 import de.sb.plugin.finance.util.R;
 
 @SuppressWarnings("restriction")
-public class NewAccountDialog extends TitleAreaDialog {
+public class NewAccountDialog extends AbstractDialog {
 	private final Account account;
 	// private ComboViewer cvLogo;
 	private Text txtDescription;
@@ -38,19 +35,9 @@ public class NewAccountDialog extends TitleAreaDialog {
 	private Binding bindStartAmount;
 
 	public NewAccountDialog(final Shell parentShell) {
-		super(parentShell);
+		super(parentShell, R.TITLE_DIALOG_NEW_ACCOUNT);
 
 		this.account = new Account();
-	}
-
-	private boolean checkSeverity(List<BindingStatus> statusList) {
-		for (BindingStatus status : statusList) {
-			if (status.getSeverity() != ValidationStatus.ok().getSeverity()) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	@Override
@@ -58,15 +45,6 @@ public class NewAccountDialog extends TitleAreaDialog {
 		super.create();
 
 		setBinding();
-	}
-
-	@Override
-	protected Control createContents(final Composite parent) {
-		Control contents = super.createContents(parent);
-
-		setTitle(R.TITLE_DIALOG_NEW_ACCOUNT);
-
-		return contents;
 	}
 
 	@Override
@@ -118,7 +96,8 @@ public class NewAccountDialog extends TitleAreaDialog {
 		}
 	}
 
-	private void setBinding() {
+	@Override
+	protected void setBinding() {
 		DataBindingContext ctx = new DataBindingContext();
 
 		// Binding mit Validierung

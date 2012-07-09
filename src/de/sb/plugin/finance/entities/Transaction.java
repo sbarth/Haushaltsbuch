@@ -3,6 +3,7 @@ package de.sb.plugin.finance.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,11 +49,13 @@ public class Transaction extends AbstractBean implements Serializable {
 	@Column(name = "type")
 	private String type;
 
-	@Column(name = "parent_id")
+	@Column(name = "transfer_id")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Transaction transfer;
 
-	public Transaction() {}
+	public Transaction() {
+		date = new GregorianCalendar();
+	}
 
 	public Account getAccount() {
 		return account;

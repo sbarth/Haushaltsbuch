@@ -2,6 +2,7 @@ package de.sb.plugin.finance.ui.transaction;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 import org.eclipse.jface.viewers.ISelection;
@@ -29,11 +30,12 @@ import de.sb.plugin.finance.util.R;
 
 public class TransactionTableComposite implements PropertyChangeListener {
 	private final Composite content;
-	private final ElementToNodeParser parser;
 	private final int[] tableColumnWidths = R.TABLE_TRANSACTION_COLUMN_WIDTHS;
 	private final IWorkbenchPartSite site;
 	private final String[] tableColumnNames = R.TABLE_TRANSACTION_COLUMNS;
 	private final TableTransactionFilter filter;
+	private ElementToNodeParser parser;
+	private String groupBy = R.COMBO_TRANSACTION_GROUPBY_DATE;
 	private TreeViewer treeViewer;
 
 	public TransactionTableComposite(final Composite parent, final IWorkbenchPartSite workbenchSite, final TableTransactionFilter filter) {
@@ -45,6 +47,7 @@ public class TransactionTableComposite implements PropertyChangeListener {
 		this.site = workbenchSite;
 
 		filter.addPropertyChangeListener(this);
+		filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
 		filter.setFilterByDate(R.COMBO_TRANSACTION_TIMESPAN_CURRENTMONTH);
 
 		if (tableColumnNames.length != tableColumnWidths.length) {
@@ -78,36 +81,8 @@ public class TransactionTableComposite implements PropertyChangeListener {
 					Object o = iterator.next();
 
 					if (o instanceof String) {
-						String groupBy = (String) o;
-
-						switch (groupBy) {
-							case R.COMBO_TRANSACTION_GROUPBY_ACCOUNT:
-								// TODO GrouBy implementieren
-								break;
-							case R.COMBO_TRANSACTION_GROUPBY_BRANCH:
-								// TODO GrouBy implementieren
-								break;
-							case R.COMBO_TRANSACTION_GROUPBY_CATEGORY:
-								// TODO GrouBy implementieren
-								break;
-							case R.COMBO_TRANSACTION_GROUPBY_DATE:
-								setInput(parser.parseByDay());
-								break;
-							case R.COMBO_TRANSACTION_GROUPBY_MONTH:
-								// TODO GrouBy implementieren
-								break;
-							case R.COMBO_TRANSACTION_GROUPBY_NOTHING:
-								setInput(parser.parseByNothing());
-								break;
-							case R.COMBO_TRANSACTION_GROUPBY_TRANSACTION_TYPE:
-								// TODO GrouBy implementieren
-								break;
-							case R.COMBO_TRANSACTION_GROUPBY_WEEK:
-								setInput(parser.parseByWeek());
-								break;
-							default:
-								break;
-						}
+						groupBy = (String) o;
+						setInput(parser.getTreeNode(groupBy));
 					}
 				}
 			}
@@ -132,7 +107,7 @@ public class TransactionTableComposite implements PropertyChangeListener {
 		tree.setLayoutData(gd);
 
 		treeViewer.addFilter(filter);
-		setInput(parser.parseByDay());
+		setInput(parser.getTreeNode(groupBy));
 	}
 
 	private void createTreeViewerColumn(final String columnName, final int columnWidth) {
@@ -148,8 +123,6 @@ public class TransactionTableComposite implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName().equals("filterChanged") && event.getNewValue().toString().equals("true")) {
-			filter.setFilterChanged(false);
-
 			treeViewer.refresh();
 
 			if (filter.getFilterBySearch() != null && !filter.getFilterBySearch().isEmpty()) {
@@ -157,7 +130,14 @@ public class TransactionTableComposite implements PropertyChangeListener {
 			} else {
 				treeViewer.collapseAll();
 			}
+
+			filter.setFilterChanged(false);
 		}
+	}
+
+	public void refreshView() {
+		parser = new ElementToNodeParser(DatabaseOperations.getInstance().getAllTransactions());
+		setInput(parser.getTreeNode(groupBy));
 	}
 
 	private void setInput(TreeNode treeNode) {

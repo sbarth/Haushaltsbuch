@@ -5,8 +5,12 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 
+import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Transaction;
+import de.sb.plugin.finance.ui.TransactionListView;
 import de.sb.plugin.finance.ui.dialogs.NewTransactionDialog;
 
 public class NewTransactionDialogHandler extends AbstractHandler {
@@ -15,12 +19,13 @@ public class NewTransactionDialogHandler extends AbstractHandler {
 		NewTransactionDialog dialog = new NewTransactionDialog(new Shell());
 
 		if (dialog.open() == Window.OK) {
+			DatabaseOperations ops = DatabaseOperations.getInstance();
 			Transaction t = dialog.getTransaction();
+			ops.insert(t);
 
-			System.err.println("account: " + t.getAccount());
-			System.err.println("category: " + t.getCategory());
-			System.err.println("transfer: " + t.getTransfer());
-			System.err.println("type: " + t.getType());
+			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			TransactionListView view = (TransactionListView) page.getActivePart();
+			view.refreshView();
 		}
 
 		return null;

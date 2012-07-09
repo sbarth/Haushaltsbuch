@@ -12,6 +12,7 @@ public class R {
 	 */
 	public static final Color COLOR_TABLE_ITEM_INCOME = new Color(null, 0, 250, 154); // MediumSpringGreen
 	public static final Color COLOR_TABLE_ITEM_OUTCOME = new Color(null, 219, 112, 147); // PaleVioletRed
+	public static final Color COLOR_TABLE_ITEM_TRANSFER = new Color(null, 0,191,255); // DeepSkyBlue
 
 	/**
 	 * Integer-Arrays
@@ -80,8 +81,8 @@ public class R {
 
 	public static final String TRANSACTION_TYPE_FIX_INCOME = "Einnahme (Fix)";
 	public static final String TRANSACTION_TYPE_FIX_OUTCOME = "Ausgabe (Fix)";
-	public static final String TRANSACTION_TYPE_INCOME = "Einnahme";
-	public static final String TRANSACTION_TYPE_OUTCOME = "Ausgabe";
+	public static final String TRANSACTION_TYPE_INCOME = "Einnahme (Variabel)";
+	public static final String TRANSACTION_TYPE_OUTCOME = "Ausgabe (Variabel)";
 	public static final String TRANSACTION_TYPE_TRANSFER = "Umbuchung";
 
 	/**

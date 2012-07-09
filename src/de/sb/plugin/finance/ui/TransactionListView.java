@@ -10,6 +10,10 @@ import de.sb.plugin.finance.ui.transaction.SummarizationComposite;
 import de.sb.plugin.finance.ui.transaction.TransactionTableComposite;
 
 public class TransactionListView extends ViewPart {
+	private FilterComposite filterComp;
+	private TransactionTableComposite tableComp;
+	private SummarizationComposite summarizationComp;
+
 	public TransactionListView() {
 
 	}
@@ -21,9 +25,13 @@ public class TransactionListView extends ViewPart {
 
 		TableTransactionFilter filter = new TableTransactionFilter();
 
-		FilterComposite filterComp = new FilterComposite(parent, getSite(), filter);
-		TransactionTableComposite tableComp = new TransactionTableComposite(parent, getSite(), filter);
-		SummarizationComposite summarizationComp = new SummarizationComposite(parent);
+		filterComp = new FilterComposite(parent, getSite(), filter);
+		tableComp = new TransactionTableComposite(parent, getSite(), filter);
+		summarizationComp = new SummarizationComposite(parent);
+	}
+
+	public void refreshView() {
+		tableComp.refreshView();
 	}
 
 	@Override

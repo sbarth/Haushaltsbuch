@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.TreeNode;
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.entities.TransactionCompareByDate;
 import de.sb.plugin.finance.util.Compare;
+import de.sb.plugin.finance.util.R;
 
 public class ElementToNodeParser {
 	private enum LabelType {
@@ -21,7 +22,7 @@ public class ElementToNodeParser {
 		WEEK_OF_YEAR,
 	}
 
-	private List<Transaction> transactions;
+	private final List<Transaction> transactions;
 
 	public ElementToNodeParser(final List<Transaction> transactions) {
 		this.transactions = transactions;
@@ -57,6 +58,41 @@ public class ElementToNodeParser {
 		return result;
 	}
 
+	public TreeNode getTreeNode(String groupBy) {
+		TreeNode node = null;
+
+		switch (groupBy) {
+			case R.COMBO_TRANSACTION_GROUPBY_ACCOUNT:
+				// TODO GroupBy implementieren
+				break;
+			case R.COMBO_TRANSACTION_GROUPBY_BRANCH:
+				// TODO GroupBy implementieren
+				break;
+			case R.COMBO_TRANSACTION_GROUPBY_CATEGORY:
+				// TODO GroupBy implementieren
+				break;
+			case R.COMBO_TRANSACTION_GROUPBY_DATE:
+				node = parseByDay();
+				break;
+			case R.COMBO_TRANSACTION_GROUPBY_MONTH:
+				// TODO GroupBy implementieren
+				break;
+			case R.COMBO_TRANSACTION_GROUPBY_NOTHING:
+				node = parseByNothing();
+				break;
+			case R.COMBO_TRANSACTION_GROUPBY_TRANSACTION_TYPE:
+				// TODO GroupBy implementieren
+				break;
+			case R.COMBO_TRANSACTION_GROUPBY_WEEK:
+				node = parseByWeek();
+				break;
+			default:
+				break;
+		}
+
+		return node;
+	}
+
 	private TreeNode[] listToArray(final List<TreeNode> list) {
 		TreeNode[] array = new TreeNode[list.size()];
 
@@ -68,7 +104,7 @@ public class ElementToNodeParser {
 		return array;
 	}
 
-	public TreeNode parseByDay() {
+	private TreeNode parseByDay() {
 		TreeNode root = new TreeNode("ROOT");
 		List<TreeNode> rootChildren = new ArrayList<TreeNode>();
 		List<TreeNode> nodeChildren = new ArrayList<TreeNode>();
@@ -110,7 +146,7 @@ public class ElementToNodeParser {
 		return root;
 	}
 
-	public TreeNode parseByNothing() {
+	private TreeNode parseByNothing() {
 		TreeNode root = new TreeNode("ROOT");
 		List<TreeNode> rootChildren = new ArrayList<TreeNode>();
 
@@ -127,7 +163,7 @@ public class ElementToNodeParser {
 		return root;
 	}
 
-	public TreeNode parseByWeek() {
+	private TreeNode parseByWeek() {
 		TreeNode root = new TreeNode("ROOT");
 		List<TreeNode> rootChildren = new ArrayList<TreeNode>();
 		List<TreeNode> nodeChildren = new ArrayList<TreeNode>();

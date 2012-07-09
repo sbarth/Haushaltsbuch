@@ -10,6 +10,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
@@ -64,6 +65,13 @@ public class SwtWidgetFactory {
 		txt.addVerifyListener(new CurrencyVerifyListener());
 
 		return txt;
+	}
+
+	public static DateTime createDateTime(Composite parent, GridData layoutData) {
+		DateTime dateTime = new DateTime(parent, SWT.NONE);
+		dateTime.setLayoutData(layoutData);
+
+		return dateTime;
 	}
 
 	public static Label createLabel(Composite parent, String text, GridData layoutData) {

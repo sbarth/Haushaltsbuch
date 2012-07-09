@@ -26,6 +26,8 @@ public class TreeColumnLabelProvider extends ColumnLabelProvider {
 				return R.COLOR_TABLE_ITEM_INCOME;
 			} else if (TransactionType.FIX_OUTCOME.getName().equals(type) || TransactionType.OUTCOME.getName().equals(type)) {
 				return R.COLOR_TABLE_ITEM_OUTCOME;
+			} else if(TransactionType.TRANSFER.getName().equals(type)) {
+				return R.COLOR_TABLE_ITEM_TRANSFER;
 			}
 		}
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="finance.product" id="de.sb.plugin.finance.finance_product_id" application="de.sb.plugin.finance.application" useFeatures="false" includeLaunchers="true">
+<product name="finance.product" id="de.sb.plugin.finance.finance_product_id" application="de.sb.plugin.finance.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -12,15 +12,6 @@
 
    <windowImages/>
 
-   <launcher>
-      <solaris/>
-      <win useIco="false">
-         <bmp/>
-      </win>
-   </launcher>
-
-   <vm>
-   </vm>
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -33,6 +24,7 @@
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
+      <plugin id="org.eclipse.core.databinding.beans"/>
       <plugin id="org.eclipse.core.databinding.observable"/>
       <plugin id="org.eclipse.core.databinding.property"/>
       <plugin id="org.eclipse.core.expressions"/>
