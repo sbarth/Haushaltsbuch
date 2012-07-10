@@ -12,7 +12,7 @@ public class R {
 	 */
 	public static final Color COLOR_TABLE_ITEM_INCOME = new Color(null, 0, 250, 154); // MediumSpringGreen
 	public static final Color COLOR_TABLE_ITEM_OUTCOME = new Color(null, 219, 112, 147); // PaleVioletRed
-	public static final Color COLOR_TABLE_ITEM_TRANSFER = new Color(null, 0,191,255); // DeepSkyBlue
+	public static final Color COLOR_TABLE_ITEM_TRANSFER = new Color(null, 0, 191, 255); // DeepSkyBlue
 
 	/**
 	 * Integer-Arrays
@@ -73,8 +73,8 @@ public class R {
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_DIFFERENCE = "Differenz: ";
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_FIXINCOME = "Fixe Einnahmen:";
 	public static final String LABEL_SUMMARIZATION_COMPOSITE_FIXOUTCOME = "Fixe Ausgaben:";
-	public static final String LABEL_SUMMARIZATION_COMPOSITE_VARINCOME = "Einmailige Einnahmen:";
-	public static final String LABEL_SUMMARIZATION_COMPOSITE_VAROUTCOME = "Einmailige Ausgaben:";
+	public static final String LABEL_SUMMARIZATION_COMPOSITE_VARINCOME = "Einmalige Einnahmen:";
+	public static final String LABEL_SUMMARIZATION_COMPOSITE_VAROUTCOME = "Einmalige Ausgaben:";
 
 	public static final String TITLE_DIALOG_NEW_ACCOUNT = "Erstelle neues Konto";
 	public static final String TITLE_DIALOG_NEW_TRANSACTION = "Erstelle neue Buchung";
@@ -121,5 +121,4 @@ public class R {
 	 */
 	public static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(Locale.GERMANY);
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
-
 }
