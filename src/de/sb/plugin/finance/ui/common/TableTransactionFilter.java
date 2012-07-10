@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.jface.viewers.Viewer;
@@ -17,11 +19,12 @@ import de.sb.plugin.finance.util.R;
 
 //TODO Interface für die SetterMethoden und dann nur noch diese an Views übergeben
 public class TableTransactionFilter extends ViewerFilter {
+	private final PropertyChangeSupport changes;
 	private Account filterByAccount;
 	private boolean filterChanged;
 	private Calendar calFrom;
 	private Calendar calTo;
-	private final PropertyChangeSupport changes;
+	private final Set<Transaction> transactions;
 	private String filterByDate;
 	private String filterBySearch;
 	private String filterByTransactionType;
@@ -30,9 +33,10 @@ public class TableTransactionFilter extends ViewerFilter {
 		calFrom = new GregorianCalendar();
 		calTo = new GregorianCalendar();
 		changes = new PropertyChangeSupport(this);
+		transactions = new HashSet<Transaction>();
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		changes.addPropertyChangeListener(listener);
 	}
 
@@ -46,6 +50,10 @@ public class TableTransactionFilter extends ViewerFilter {
 
 	public String getFilterBySearch() {
 		return filterBySearch;
+	}
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
 	}
 
 	public boolean matches(final Transaction transaction) {
@@ -72,18 +80,24 @@ public class TableTransactionFilter extends ViewerFilter {
 		}
 		if (filterByTransactionType != null && !filterByTransactionType.equals("")) {
 			if (filterByTransactionType.equals(R.COMBO_TRANSACTION_TYPE_INCOME)) {
-				matches = matches && (TransactionType.FIX_INCOME.getName().equals(transaction.getType()) || //
+				matches = matches && (TransactionType.FIX_INCOME.getName().equals(transaction.getType()) || // Einnahme?
 						TransactionType.INCOME.getName().equals(transaction.getType()));
 			} else if (filterByTransactionType.equals(R.COMBO_TRANSACTION_TYPE_OUTCOME)) {
-				matches = matches && (TransactionType.FIX_OUTCOME.getName().equals(transaction.getType()) //
+				matches = matches && (TransactionType.FIX_OUTCOME.getName().equals(transaction.getType()) // Ausgabe?
 						|| TransactionType.OUTCOME.getName().equals(transaction.getType()));
+			} else if (filterByTransactionType.equals(R.COMBO_TRANSACTION_TYPE_TRANSFER)) {
+				matches = matches && (TransactionType.TRANSFER.getName().equals(transaction.getType())); // Umbuchung
 			}
+		}
+
+		if (matches) {
+			transactions.add(transaction);
 		}
 
 		return matches;
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		changes.removePropertyChangeListener(listener);
 	}
 
@@ -91,16 +105,17 @@ public class TableTransactionFilter extends ViewerFilter {
 	public boolean select(final Viewer viewer, final Object parentElement, final Object element) {
 		TreeNode node = (TreeNode) element;
 		if (node.getValue().getClass() == Transaction.class) {
-			return matches((Transaction) node.getValue());
+			boolean matches = matches((Transaction) node.getValue());
+
+			return matches;
 		} else if (node.getValue().getClass() == String.class) {
+			boolean matches = false;
 			for (TreeNode child : node.getChildren()) {
 				if (child.getValue().getClass() == Transaction.class) {
-					boolean match = matches((Transaction) child.getValue());
-					if (match) {
-						return true;
-					}
+					matches = matches | matches((Transaction) child.getValue());
 				}
 			}
+			return matches;
 		}
 
 		return false;
@@ -112,10 +127,12 @@ public class TableTransactionFilter extends ViewerFilter {
 	}
 
 	public void setFilterByAccount(final Account o) {
+		transactions.clear();
 		filterByAccount = o;
 	}
 
 	public void setFilterByDate(final String date) {
+		transactions.clear();
 		switch (date) {
 			case R.COMBO_TRANSACTION_TIMESPAN_CURRENTDAY:
 				break;
@@ -170,16 +187,18 @@ public class TableTransactionFilter extends ViewerFilter {
 	}
 
 	public void setFilterBySearch(final String filterBySearch) {
+		transactions.clear();
 		this.filterBySearch = filterBySearch;
 	}
 
 	public void setFilterByTransactionType(final String transactionType) {
+		transactions.clear();
 		filterByTransactionType = transactionType;
 	}
 
-	public void setFilterChanged(boolean b) {
-		boolean old = this.filterChanged;
-		this.filterChanged = b;
+	public void setFilterChanged(final boolean b) {
+		boolean old = filterChanged;
+		filterChanged = b;
 		changes.firePropertyChange("filterChanged", old, filterChanged);
 	}
 }

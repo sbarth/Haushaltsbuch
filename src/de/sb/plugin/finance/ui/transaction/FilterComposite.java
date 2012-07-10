@@ -1,7 +1,6 @@
 package de.sb.plugin.finance.ui.transaction;
 
 import java.util.Arrays;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 import org.eclipse.jface.viewers.ComboViewer;
@@ -24,6 +23,7 @@ import de.sb.plugin.finance.ui.common.LayoutFactory;
 import de.sb.plugin.finance.ui.common.SwtWidgetFactory;
 import de.sb.plugin.finance.ui.common.TableTransactionFilter;
 import de.sb.plugin.finance.ui.provider.AccountLabelProvider;
+import de.sb.plugin.finance.util.ObjectFactory;
 import de.sb.plugin.finance.util.R;
 import de.sb.plugin.finance.util.SelectionProviderIntermediate;
 
@@ -38,12 +38,12 @@ public class FilterComposite {
 
 	private final ISelectionChangedListener filterChangedListener = new ISelectionChangedListener() {
 		@Override
-		public void selectionChanged(SelectionChangedEvent event) {
+		public void selectionChanged(final SelectionChangedEvent event) {
 			FilterComposite.this.selectionChanged((ComboViewer) event.getSource(), event.getSelection());
 		}
 	};
 
-	public FilterComposite(final Composite parent, final IWorkbenchPartSite site, TableTransactionFilter filter) {
+	public FilterComposite(final Composite parent, final IWorkbenchPartSite site, final TableTransactionFilter filter) {
 		content = new Composite(parent, SWT.BORDER);
 		content.setLayout(new GridLayout(5, false));
 		content.setLayoutData(LayoutFactory.createGridData(true, false, GridData.FILL, GridData.GRAB_VERTICAL));
@@ -103,14 +103,14 @@ public class FilterComposite {
 
 		search.addListener(SWT.Modify, new Listener() {
 			@Override
-			public void handleEvent(Event event) {
+			public void handleEvent(final Event event) {
 				filter.setFilterBySearch(search.getText());
 				filter.setFilterChanged(true);
 			}
 		});
 	}
 
-	private void selectionChanged(ComboViewer cv, ISelection selection) {
+	private void selectionChanged(final ComboViewer cv, final ISelection selection) {
 		if (!(selection instanceof IStructuredSelection)) {
 			return;
 		}
@@ -125,7 +125,7 @@ public class FilterComposite {
 				if (cv == cvTransactionType) {
 					filter.setFilterByTransactionType(value);
 				} else if (cv == cvTimespan) {
-					filter.setDateFromTo(new GregorianCalendar(), new GregorianCalendar());
+					filter.setDateFromTo(ObjectFactory.getCurrentDay(0, 0, 0, 0), ObjectFactory.getCurrentDay(23, 59, 59, 999));
 					filter.setFilterByDate(value);
 				}
 			} else if (o instanceof Account) {

@@ -27,7 +27,7 @@ public class TransactionListView extends ViewPart {
 
 		filterComp = new FilterComposite(parent, getSite(), filter);
 		tableComp = new TransactionTableComposite(parent, getSite(), filter);
-		summarizationComp = new SummarizationComposite(parent);
+		summarizationComp = new SummarizationComposite(parent, filter);
 	}
 
 	public void refreshView() {

@@ -40,7 +40,7 @@ import de.sb.plugin.finance.util.R;
 //		- das 2. Accountfeld wird bei einer Umbuchung zum Pflichtfeld
 @SuppressWarnings("restriction")
 public class NewTransactionDialog extends AbstractDialog {
-	private final Transaction transactionTransferTo;
+//	private final Transaction transactionTransferTo;
 	private final Transaction transaction;
 	private Binding bindAccount;
 	private Binding bindAmount;
@@ -61,7 +61,7 @@ public class NewTransactionDialog extends AbstractDialog {
 		super(parentShell, R.TITLE_DIALOG_NEW_TRANSACTION);
 
 		this.transaction = new Transaction();
-		this.transactionTransferTo = new Transaction();
+//		this.transactionTransferTo = new Transaction();
 	}
 
 	// private void copyTransactionTransferTo() {

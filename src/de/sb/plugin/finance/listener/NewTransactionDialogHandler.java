@@ -24,8 +24,10 @@ public class NewTransactionDialogHandler extends AbstractHandler {
 			ops.insert(t);
 
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			TransactionListView view = (TransactionListView) page.getActivePart();
-			view.refreshView();
+			if (page.getActivePart() instanceof TransactionListView) {
+				TransactionListView view = (TransactionListView) page.getActivePart();
+				view.refreshView();
+			}
 		}
 
 		return null;
