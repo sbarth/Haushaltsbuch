@@ -5,9 +5,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
 import de.sb.plugin.finance.ui.common.TableTransactionFilter;
-import de.sb.plugin.finance.ui.transaction.FilterComposite;
-import de.sb.plugin.finance.ui.transaction.SummarizationComposite;
-import de.sb.plugin.finance.ui.transaction.TransactionTableComposite;
+import de.sb.plugin.finance.ui.views.transaction.FilterComposite;
+import de.sb.plugin.finance.ui.views.transaction.SummarizationComposite;
+import de.sb.plugin.finance.ui.views.transaction.TransactionTableComposite;
 
 public class TransactionListView extends ViewPart {
 	private FilterComposite filterComp;

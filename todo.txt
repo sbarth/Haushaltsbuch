@@ -1,0 +1,31 @@
+#######
+Buchung
+-------
+
+- Dialog zum Anlegen von Kategorien
+
+- Kontextmenü zum Bearbeiten und Löschen von Buchungen
+
+- Doppelklick für Buchungen
+
+- Umstrukturierung
+
+- Daten für freier Zeitraum
+
+- Importfunktion für CSV
+	+ Sparkassenformat
+	+ Aquamarinformat
+	+ eigenes Format
+
+#########
+Statistik
+---------
+
+- Balkendiagram mit Einnahmen und Ausgaben (Jeder Balken ist unterteilt in Fix und Variabel)
+	Ausgaben und Einnahmenverlauf
+
+- Kontostandverlauf für jeden Tag in angegegebn Zeitraum
+
+- Kuchendiagram für Aufteilung der Kategorien
+
+- Rechts von Buchungen anstatt eigene View

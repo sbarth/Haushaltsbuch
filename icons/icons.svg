@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="haus.svg">
+  <defs
+     id="defs4">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3768"
+       is_visible="true" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.4277996"
+     inkscape:cx="873.71574"
+     inkscape:cy="906.28266"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1148"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;stroke:none"
+       id="rect3816"
+       width="327.82556"
+       height="327.82556"
+       x="161.94119"
+       y="595.88464"
+       rx="9.8912878"
+       ry="9.8912878"
+       inkscape:export-filename="C:\Users\stefan.barth\Desktop\transaction_16.png"
+       inkscape:export-xdpi="4.39258"
+       inkscape:export-ydpi="4.39258" />
+    <g
+       id="g3797"
+       transform="translate(-51.239666,-84.297524)"
+       inkscape:export-filename="C:\Users\stefan.barth\Desktop\account_16.png"
+       inkscape:export-xdpi="4.110249"
+       inkscape:export-ydpi="4.110249"
+       style="fill:#008080;stroke:#008080">
+      <path
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="rect2987"
+         d="M 250.11786,190.75 126.58661,314.28125 c -0.1193,0.1193 -0.0625,1.51892 -0.0625,2.875 l 0,158.40625 247.1875,0 0,-158.40625 c 0,-2.03426 0.0935,-2.71902 -0.0625,-2.875 z"
+         style="fill:#008080;fill-opacity:1;fill-rule:evenodd;stroke:#008080;stroke-width:5.09999990000000030;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:5.28060054999999990" />
+      <path
+         inkscape:connector-curvature="0"
+         id="rect3762"
+         d="m 250.09375,131.31821 -13.625,13.65617 -150.25,150.21866 13.65625,13.65625 150.25,-150.21874 150.25,150.21874 13.65625,-13.65625 -150.25,-150.21866 -13.625,-13.65617 -0.0312,0.0312 -0.0312,-0.0312 z"
+         style="fill:#008080;fill-opacity:1;fill-rule:evenodd;stroke:#008080;stroke-width:5.00099992999999990;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:5.28060054999999990" />
+      <path
+         id="path3792"
+         d="m 123.96875,155.90625 0,73.96875 50.5625,-50.53125 0,-23.4375 -50.5625,0 z"
+         style="fill:#008080;stroke:#008080"
+         inkscape:connector-curvature="0" />
+    </g>
+    <path
+       style="fill:#008080;stroke:none"
+       d="m 191.12005,542.13038 c -45.30099,0 -81.78125,36.44901 -81.78125,81.75 l 0,164.28125 c 0,45.30099 36.48026,81.78125 81.78125,81.78125 l 164.28125,0 c 45.30099,0 81.78125,-36.48026 81.78125,-81.78125 l 0,-164.28125 c 0,-45.30099 -36.48026,-81.75 -81.78125,-81.75 l -164.28125,0 z m 127.4375,32.625 c 19.39921,2.6e-4 36.24375,3.51894 50.5625,10.5625 l -10.21875,47.96875 c -9.81532,-9.81494 -24.11565,-14.71854 -42.9375,-14.71875 -18.82212,2.1e-4 -34.08739,6.73994 -45.75,20.25 -6.58201,7.62137 -11.22874,17.16216 -14,28.59375 l 95.25,0 -5.53125,26.84375 -93.1875,0 c -0.11554,2.656 -0.18757,6.06188 -0.1875,10.21875 -7e-5,4.04166 0.11274,8.26842 0.34375,12.65625 l 88.15625,0 -5.53125,26.84375 -78.96875,0 c 2.88673,12.35562 7.30785,22.05 13.3125,29.09375 11.54714,13.62579 26.55555,20.43754 45.03125,20.4375 22.17055,4e-5 39.86722,-6.81171 53.03125,-20.4375 l 0,53 c -15.01158,7.50571 -32.52343,11.25 -52.5,11.25 -33.71804,0 -61.41626,-11.53051 -83.125,-34.625 -14.7805,-15.7042 -24.54691,-35.27779 -29.28125,-58.71875 l -25.625,0 5.53125,-26.84375 16.96875,0 c -0.11549,-2.77122 -0.15627,-5.72587 -0.15625,-8.84375 -2e-5,-5.3116 0.11279,-9.98958 0.34375,-14.03125 l -22.6875,0 5.53125,-26.84375 20.625,0 c 4.84982,-22.97882 14.47216,-42.21399 28.90625,-57.6875 21.82421,-23.32518 50.52815,-34.96849 86.09375,-34.96875 z"
+       id="rect3818"
+       inkscape:export-filename="C:\Users\stefan.barth\Desktop\transaction_16.png"
+       inkscape:export-xdpi="4.3923364"
+       inkscape:export-ydpi="4.3923364"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

@@ -7,11 +7,11 @@ Bundle-Activator: de.sb.plugin.finance.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit,
- org.eclipse.core.databinding.observable;bundle-version="1.4.1",
- org.eclipse.jface.databinding;bundle-version="1.6.0",
- org.eclipse.core.databinding.property;bundle-version="1.4.100",
- org.eclipse.core.databinding;bundle-version="1.4.1",
- org.eclipse.core.databinding.beans;bundle-version="1.2.200"
+ org.eclipse.core.databinding;bundle-version="1.4.0",
+ org.eclipse.core.databinding.beans;bundle-version="1.2.100",
+ org.eclipse.core.databinding.observable;bundle-version="1.4.0",
+ org.eclipse.core.databinding.property;bundle-version="1.4.0",
+ org.eclipse.jface.databinding;bundle-version="1.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: data/lib/mysql-connector-java-5.1.20.jar,
@@ -37,4 +37,6 @@ Bundle-ClassPath: data/lib/mysql-connector-java-5.1.20.jar,
  data/lib/oscache-2.1.jar,
  data/lib/proxool-0.8.3.jar,
  data/lib/xerces-2.6.2.jar,
- data/lib/xml-apis.jar
+ data/lib/xml-apis.jar,
+ data/lib/jcommon-1.0.17.jar,
+ data/lib/jfreechart-1.0.14.jar

@@ -6,8 +6,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
-import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Account;
+import de.sb.plugin.finance.io.DatabaseOperations;
 import de.sb.plugin.finance.ui.dialogs.NewAccountDialog;
 
 public class NewAccountDialogHandler extends AbstractHandler {

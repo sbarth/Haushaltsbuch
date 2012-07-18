@@ -14,9 +14,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import de.sb.plugin.finance.entities.Category;
 import de.sb.plugin.finance.listener.CurrencyVerifyListener;
-import de.sb.plugin.finance.ui.provider.CategoryLabelProvider;
 
 public class SwtWidgetFactory {
 	public static Button createButton(final Composite parent, final String text, final GridData layoutData) {
@@ -34,22 +32,16 @@ public class SwtWidgetFactory {
 		return but;
 	}
 
-	public static ComboViewer createComboViewer(final Composite parent, final List<?> list, final GridData layoutData, final LabelProvider provider) {
-		ComboViewer cv = new ComboViewer(parent, SWT.READ_ONLY);
-		cv.getCombo().setLayoutData(layoutData);
-		cv.setContentProvider(ArrayContentProvider.getInstance());
-		cv.setInput(list);
+	public static Button createCheckBox(final Composite parent, final String text, final GridData layoutData) {
+		Button but = new Button(parent, SWT.CHECK);
+		but.setLayoutData(layoutData);
+		but.setText(text);
 
-		if (provider != null) {
-			cv.setLabelProvider(provider);
-		}
-
-		return cv;
+		return but;
 	}
 
-	public static ComboViewer createComboViewerWritable(final Composite parent, final List<Category> list, final GridData layoutData,
-			final CategoryLabelProvider provider) {
-		ComboViewer cv = new ComboViewer(parent, SWT.BORDER);
+	public static ComboViewer createComboViewer(final Composite parent, final List<?> list, final GridData layoutData, final LabelProvider provider) {
+		ComboViewer cv = new ComboViewer(parent, SWT.READ_ONLY);
 		cv.getCombo().setLayoutData(layoutData);
 		cv.setContentProvider(ArrayContentProvider.getInstance());
 		cv.setInput(list);
@@ -88,9 +80,26 @@ public class SwtWidgetFactory {
 		return lbl;
 	}
 
+	public static Label createLabelCenter(final Composite parent, final String text, final GridData layoutData) {
+		Label lbl = createLabel(parent, text, layoutData);
+		lbl.setAlignment(SWT.CENTER);
+
+		return lbl;
+	}
+
 	public static Label createLabelRight(final Composite parent, final String text, final GridData layoutData) {
 		Label lbl = createLabel(parent, text, layoutData);
 		lbl.setAlignment(SWT.RIGHT);
+
+		return lbl;
+	}
+
+	public static Label createLabelSeparatorHorizontal(final Composite parent, final GridData layoutData) {
+		Label lbl = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
+
+		if (layoutData != null) {
+			lbl.setLayoutData(layoutData);
+		}
 
 		return lbl;
 	}

@@ -8,8 +8,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 
-import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Transaction;
+import de.sb.plugin.finance.io.DatabaseOperations;
 import de.sb.plugin.finance.ui.TransactionListView;
 import de.sb.plugin.finance.ui.dialogs.NewTransactionDialog;
 

@@ -26,7 +26,7 @@ create table TRANSACTION(
 	amount DECIMAL(8,2) NOT NULL,
 	description VARCHAR(1000),
 	date DATETIME NOT NULL,
-  type VARCHAR(50) NOT NULL,
+  	type VARCHAR(50) NOT NULL,
 	PRIMARY KEY (id),
     FOREIGN KEY (account_id) REFERENCES ACCOUNT(id),
     FOREIGN KEY (category_id) REFERENCES CATEGORY(id)

@@ -20,9 +20,9 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.entities.TransactionType;
+import de.sb.plugin.finance.io.DatabaseOperations;
 import de.sb.plugin.finance.ui.common.LayoutFactory;
 import de.sb.plugin.finance.ui.common.SwtWidgetFactory;
 import de.sb.plugin.finance.ui.provider.AccountLabelProvider;
@@ -36,11 +36,11 @@ import de.sb.plugin.finance.util.R;
 
 //TODO AutoComplete Klasse für TextFelder schreiben
 //TODO Umbuchung implementieren:
-//		- Wenn Umbuchung dann gibt es keine Kategorie
+//		- Wenn Umbuchung dann Kategorie Auszahlung und Einzahlung verwenden
 //		- das 2. Accountfeld wird bei einer Umbuchung zum Pflichtfeld
 @SuppressWarnings("restriction")
 public class NewTransactionDialog extends AbstractDialog {
-//	private final Transaction transactionTransferTo;
+	// private final Transaction transactionTransferTo;
 	private final Transaction transaction;
 	private Binding bindAccount;
 	private Binding bindAmount;
@@ -57,11 +57,11 @@ public class NewTransactionDialog extends AbstractDialog {
 
 	// private Label lblTransferTo;
 
-	public NewTransactionDialog(Shell parentShell) {
+	public NewTransactionDialog(final Shell parentShell) {
 		super(parentShell, R.TITLE_DIALOG_NEW_TRANSACTION);
 
-		this.transaction = new Transaction();
-//		this.transactionTransferTo = new Transaction();
+		transaction = new Transaction();
+		// this.transactionTransferTo = new Transaction();
 	}
 
 	// private void copyTransactionTransferTo() {
@@ -76,7 +76,7 @@ public class NewTransactionDialog extends AbstractDialog {
 	// }
 
 	@Override
-	protected Control createDialogArea(Composite parent) {
+	protected Control createDialogArea(final Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayout(new GridLayout(2, false));
 		comp.setLayoutData(LayoutFactory.createGridData(true, true, GridData.FILL, GridData.FILL));
@@ -88,7 +88,7 @@ public class NewTransactionDialog extends AbstractDialog {
 		cvAccount = SwtWidgetFactory.createComboViewer(comp, DatabaseOperations.getInstance().getAllAccounts(false), gdRight, new AccountLabelProvider());
 
 		SwtWidgetFactory.createLabel(comp, R.LABEL_DIALOG_NEW_TRANSACTION_CATEGORY, gdLabels);
-		cvCategory = SwtWidgetFactory.createComboViewer(comp, DatabaseOperations.getInstance().getAllCategories(), gdRight, new CategoryLabelProvider());
+		cvCategory = SwtWidgetFactory.createComboViewer(comp, DatabaseOperations.getInstance().getAllCategories(false), gdRight, new CategoryLabelProvider());
 
 		SwtWidgetFactory.createLabel(comp, R.LABEL_DIALOG_NEW_TRANSACTION_TRANSACTION_TYPE, gdLabels);
 		cvTransactionType = SwtWidgetFactory.createComboViewer(comp, Arrays.asList(TransactionType.values()), gdRight, new TransactionTypeLabelProvider());

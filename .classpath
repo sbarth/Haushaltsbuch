@@ -27,5 +27,7 @@
 	<classpathentry exported="true" kind="lib" path="data/lib/proxool-0.8.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="data/lib/xerces-2.6.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="data/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="data/lib/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="data/lib/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

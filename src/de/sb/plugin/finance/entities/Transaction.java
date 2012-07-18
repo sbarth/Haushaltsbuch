@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,7 +21,10 @@ import de.sb.plugin.finance.util.Queries;
 
 @Entity
 @Table(name = "transaction")
-@NamedQuery(name = Queries.FIND_ALL_TRANSACTIONS, query = Queries.FIND_ALL_TRANSACTIONS_QUERY)
+@NamedQueries({
+		@NamedQuery(name = Queries.FIND_ALL_TRANSACTIONS, query = Queries.FIND_ALL_TRANSACTIONS_QUERY),
+		@NamedQuery(name = Queries.FIND_TRANSACTIONS_BY_YEAR, query = Queries.FIND_TRANSACTIONS_BY_YEAR_QUERY)
+})
 public class Transaction extends AbstractBean implements Serializable {
 	private static final long serialVersionUID = -5996366282282751725L;
 
@@ -119,11 +123,11 @@ public class Transaction extends AbstractBean implements Serializable {
 		changes.firePropertyChange("description", old, description);
 	}
 
-	public void setId(long id) {
+	public void setId(final long id) {
 		this.id = id;
 	}
 
-	public void setTransfer(Transaction transfer) {
+	public void setTransfer(final Transaction transfer) {
 		Transaction old = this.transfer;
 		this.transfer = transfer;
 		changes.firePropertyChange("transfer", old, transfer);

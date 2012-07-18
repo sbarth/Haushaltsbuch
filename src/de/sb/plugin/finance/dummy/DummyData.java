@@ -6,11 +6,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import de.sb.plugin.finance.db.DatabaseOperations;
 import de.sb.plugin.finance.entities.Account;
 import de.sb.plugin.finance.entities.Category;
 import de.sb.plugin.finance.entities.Transaction;
 import de.sb.plugin.finance.entities.TransactionType;
+import de.sb.plugin.finance.io.DatabaseOperations;
 
 public class DummyData {
 	private static List<Account> accounts;
@@ -75,11 +75,11 @@ public class DummyData {
 		return desc;
 	}
 
-	public static void insertTransactions(int count) {
+	public static void insertTransactions(final int count) {
 		DatabaseOperations ops = DatabaseOperations.getInstance();
 
 		accounts = ops.getAllAccounts(false);
-		categories = ops.getAllCategories();
+		categories = ops.getAllCategories(false);
 
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		for (int i = 0; i < count; i++) {
